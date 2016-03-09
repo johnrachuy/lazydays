@@ -7,9 +7,9 @@ myApp.config(['$routeProvider', function($routeProvider) {
             templateUrl: '/views/templates/home.html',
             controller: 'HomeController'
         })
-        .when('/site', {
+        .when('/site/:site_number', {
             templateUrl: '/views/templates/site.html',
-            controller: 'HomeController'
+            controller: 'SiteController'
         })
         .otherwise({
             redirectTo: 'home'

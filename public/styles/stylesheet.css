@@ -21,3 +21,39 @@ li a {
 li a:hover {
     background-color: #111;
 }
+
+.row1 {
+    display: inline;
+    padding: 20px;
+    border: 1px solid black;
+}
+
+.row2 {
+    display: inline;
+    padding: 20px;
+    border: 1px solid black;
+}
+
+#left {
+    width: 150px;
+    float: left;
+    padding: 5px 15px;
+}
+
+#middle {
+    width: 294px;
+    float: left;
+    padding: 5px 15px;
+    margin-top: 30px;
+}
+
+#right {
+    width: 270px;
+    float: left;
+    padding: 5px 15px;
+    margin-top: 30px;
+}
+
+.date {
+    margin: 20px;
+}
