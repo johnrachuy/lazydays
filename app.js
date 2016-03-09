@@ -52,15 +52,38 @@ app.post('/post_res', function(req, res) {
                             console.log("Error inserting data: ", err);
                             res.send(false);
                         } else {
-                            //client.query("INSERT INTO reservation (site_number, check_in, check_out, site_class, people_num, pet_num, rate, tax, hold, notes, canceled, id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)",
-                            //    [addEntry.site_number, addEntry.check_in, addEntry.check_out, addEntry.site_class, addEntry.people_num, addEntry.pet_num, addEntry.rate, addEntry.tax, addEntry.hold, addEntry.notes, addEntry.canceled, result.rows[0].id],
-
                             res.send(result);
                         }
                     });
-                        //res.send(result);
                 }
             });
+    });
+});
+
+app.get('/get_site/:site_number', function(req, res) {
+    var results = [];
+    console.log(req.params);
+
+    pg.connect(connectionString, function(err, client, done) {
+        var query = client.query('SELECT * FROM customer JOIN reservation ON customer_id=customer.id WHERE site_number = ($1)',
+            [req.params.site_number]);
+
+        // Stream results back one row at a time
+        query.on('row', function(row) {
+            results.push(row);
+        });
+
+        // close connection
+        query.on('end', function() {
+            done();
+            //console.log(results);
+            return res.json(results);
+
+        });
+
+        if(err) {
+            console.log(err);
+        }
     });
 });
 

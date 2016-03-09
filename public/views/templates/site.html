@@ -109,3 +109,8 @@
     <br>
     <button ng-click="postForm()">Save/Update</button>
 </section>
+
+<div id="bottom" ng-repeat="site in siteData">
+    <p><a>view/edit</a> {{site.last_name}} {{site.first_name}} {{site.check_in | date}} {{site.check_out | date}} {{site.notes}}</p>
+
+</div>

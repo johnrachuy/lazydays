@@ -2,6 +2,8 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
 
     $scope.site_number = $routeParams.site_number;
 
+    getSite();
+
     $scope.postForm = function() {
         var reservation = {
             site_number: $scope.site_number,
@@ -46,6 +48,17 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
         });
         console.log(reservation);
 
+    };
+
+    function getSite() {
+        $http({
+            method: 'GET',
+            url: '/get_site/'+ $scope.site_number
+        }).then(function(response) {
+            var data = response.data;
+            console.log(data);
+            $scope.siteData = response.data;
+        });
     };
 
     $scope.go = function(path) {

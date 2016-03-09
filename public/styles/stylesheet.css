@@ -55,6 +55,12 @@ li a:hover {
     margin-top: 30px;
 }
 
+#bottom {
+    clear: both;
+    vertical-align: bottom;
+    width: 100%;
+}
+
 .date {
     margin: 20px;
 }
