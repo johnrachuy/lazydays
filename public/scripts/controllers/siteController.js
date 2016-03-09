@@ -1,10 +1,10 @@
-myApp.controller('SiteController', ['$scope', '$location', '$filter', '$routeParams', function($scope, $location, $filter, $routeParams) {
+myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '$routeParams', function($scope, $http, $location, $filter, $routeParams) {
 
     $scope.site_number = $routeParams.site_number;
 
     $scope.postForm = function() {
         var reservation = {
-            site: $scope.site_number,
+            site_number: $scope.site_number,
             site_class: $scope.site.class,
             check_in: $scope.check_in,
             check_out: $scope.check_out,
@@ -23,6 +23,27 @@ myApp.controller('SiteController', ['$scope', '$location', '$filter', '$routePar
             hold: $scope.hold,
             notes: $scope.notes
         };
+
+        $http.post('/post_res', reservation).then(function(response) {
+                $scope.post = response.data;
+                $scope.site.class = '',
+                $scope.check_in = '',
+                $scope.check_out = '',
+                $scope.first_name = '',
+                $scope.last_name = '',
+                $scope.phone = '',
+                $scope.email = '',
+                $scope.street_address = '',
+                $scope.city = '',
+                $scope.state = '',
+                $scope.zip_code = '',
+                $scope.people_num = '',
+                $scope.pet_num = '',
+                $scope.rate = '',
+                $scope.tax = '',
+                $scope.hold = '',
+                $scope.notes = ''
+        });
         console.log(reservation);
 
     };

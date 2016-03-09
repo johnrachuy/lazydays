@@ -1,0 +1,29 @@
+CREATE TABLE customer
+    (
+        id SERIAL NOT NULL PRIMARY KEY,
+        first_name varchar(255) NOT NULL,
+        last_name varchar(255) NOT NULL,
+        phone varchar(30),
+        email varchar(255),
+        street_address varchar(255),
+        city varchar(100),
+        state varchar(3),
+        zip_code varchar(5)
+    );
+
+CREATE TABLE reservation
+    (
+        id SERIAL NOT NULL PRIMARY KEY,
+        site_number INTEGER NOT NULL,
+        check_in varchar(255) NOT NULL,
+        check_out varchar(255) NOT NULL,
+        site_class varchar(30) NOT NULL,
+        people_num INTEGER,
+        pet_num INTEGER,
+        rate DECIMAL,
+        tax DECIMAL,
+        hold varchar(20),
+        notes text,
+        canceled BOOLEAN NOT NULL,
+        customer_id INTEGER NOT NULL REFERENCES customer (id)
+    );
