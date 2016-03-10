@@ -30,11 +30,10 @@
         <br>
         <label for="check_out">Check OUT:</label><input type="date" ng-model="check_out">
     </form>
-
     <form>
-        <input type="text" ng-model="first_name" placeholder="First Name"><input type="text" ng-model="last_name" placeholder="Last Name">
+        <input type="text" ng-model="first_name" placeholder="First Name" value="{{edit}}"><input type="text" ng-model="last_name" placeholder="Last Name" value="{{edit}}">
         <br>
-        <input type="tel" ng-model="phone" placeholder="Phone Number"><input type="email" ng-model="email" placeholder="e-mail">
+        <input type="tel" ng-model="phone" placeholder="Phone Number" value="{{edit}}"><input type="email" ng-model="email" placeholder="e-mail">
     </form>
     <form>
         <input type="text" ng-model="street_address" placeholder="Street Address">

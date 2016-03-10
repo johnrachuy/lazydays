@@ -45,18 +45,17 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
                 $scope.tax = '',
                 $scope.hold = '',
                 $scope.notes = ''
-        });
-        console.log(reservation);
 
+                getSite();
+        });
+
+        //console.log(reservation);
     };
 
+
+
     function getSite() {
-        $http({
-            method: 'GET',
-            url: '/get_site/'+ $scope.site_number
-        }).then(function(response) {
-            var data = response.data;
-            console.log(data);
+        $http.get('/get_site/'+ $scope.site_number).then(function(response) {
             $scope.siteData = response.data;
         });
     };

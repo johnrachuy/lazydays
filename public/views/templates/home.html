@@ -4,3 +4,8 @@
     <br>
     <div class="row2">xx</div><div class="row2">xx</div><div class="row2">xx</div><div class="row2">xx</div><div class="row2">xx</div>
 </div>
+<div class="name-box">
+    <select ng-model="selectedName" ng-options="person.id as person.last_name + ', ' + person.first_name for person in getNames">
+        <option value="">Select Person</option>
+    </select>
+</div>
