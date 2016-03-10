@@ -8,6 +8,13 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function($sc
         console.log($scope.getNames);
     });
 
+    $scope.getInfo = function() {
+        console.log($scope.selectedName);
+        $http.get('/get_info/'+ $scope.selectedName).then(function(response) {
+            $scope.viewData = response.data;
+        });
+    };
+
     $scope.date = new Date();
 
     $scope.go = function(path) {

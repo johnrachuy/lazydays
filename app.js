@@ -111,6 +111,33 @@ app.get('/get_site/:site_number', function(req, res) {
     });
 });
 
+app.get('/get_info/:selectedName', function(req, res) {
+    var results = [];
+    //console.log(req.params);
+
+    pg.connect(connectionString, function(err, client, done) {
+        var query = client.query('SELECT * FROM customer JOIN reservation ON customer_id=customer.id WHERE customer_id = ($1)',
+            [req.params.selectedName]);
+
+        // Stream results back one row at a time
+        query.on('row', function(row) {
+            results.push(row);
+        });
+
+        // close connection
+        query.on('end', function() {
+            done();
+            //console.log(results);
+            return res.json(results);
+
+        });
+
+        if(err) {
+            console.log(err);
+        }
+    });
+});
+
 // Serve back static files
 app.use(express.static('public'));
 app.use(express.static('public/views'));

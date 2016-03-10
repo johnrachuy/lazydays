@@ -5,7 +5,10 @@
     <div class="row2">xx</div><div class="row2">xx</div><div class="row2">xx</div><div class="row2">xx</div><div class="row2">xx</div>
 </div>
 <div class="name-box">
-    <select ng-model="selectedName" ng-options="person.id as person.last_name + ', ' + person.first_name for person in getNames">
+    <select ng-model="selectedName" ng-options="person.id as person.last_name + ', ' + person.first_name for person in getNames" ng-change="getInfo()">
         <option value="">Select Person</option>
     </select>
+    <div ng-repeat="data in viewData">
+        <p>{{data.last_name}} {{data.first_name}} {{data.site_number}} {{data.check_in | date}} {{data.check_out | date}} {{data.notes}}</p>
+    </div>
 </div>
