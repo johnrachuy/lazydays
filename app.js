@@ -7,6 +7,31 @@ var connectionString = require('./modules/connection');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+app.get('/get_map/:date', function(req, res) {
+    var results = [];
+    var date = new Date(req.params.date).toISOString();
+
+    pg.connect(connectionString, function(err, client, done) {
+        var query = client.query('SELECT site_number FROM reservation WHERE check_in <= ($1) AND check_out > ($1)',
+            [date]);
+
+        // Stream results back one row at a time
+        query.on('row', function(row) {
+            results.push(row);
+        });
+
+        // close connection
+        query.on('end', function() {
+            done();
+            return res.json(results);
+        });
+
+        if(err) {
+            console.log(err);
+        }
+    });
+});
+
 app.get('/get_names', function(req, res) {
     var results = [];
 

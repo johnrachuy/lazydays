@@ -4,6 +4,26 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
 
     getSite();
 
+    $scope.setSeasonal = function() {
+        $scope.rate = '1600.00';
+    };
+
+    $scope.setMonthly = function() {
+        $scope.rate = '500.00';
+    };
+
+    $scope.setWeekly = function() {
+        $scope.rate = '200.00';
+    };
+
+    $scope.setHoliday = function() {
+        $scope.rate = '45.00';
+    };
+
+    $scope.setNightly = function() {
+        $scope.rate = '40.00';
+    };
+
     $scope.postForm = function() {
         var reservation = {
             site_number: $scope.site_number,

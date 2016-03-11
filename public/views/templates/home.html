@@ -1,10 +1,11 @@
-<div class="date"><button>Prev</button>{{date | date}}<button>Next</button></div>
+<div class="date"><button ng-click="prevDay()">Prev</button>{{date | date}}<button ng-click="nextDay()">Next</button></div>
 <div id="map">
-    <div class="row1" ng-click="go('/site/20')">20</div><div class="row1" ng-click="go('/site/19')">19</div><div class="row1" ng-click="go('/site/18')">18</div><div class="row1"ng-click="go('/site/17')">17</div><div class="row1" ng-click="go('/site/16')">16</div><div class="row1" ng-click="go('/site/15')">15</div><div class="row1" ng-click="go('/site/14')">14</div><div class="row1" ng-click="go('/site/13')">13</div><div class="row1" ng-click="go('/site/12')">12</div><div class="row1" ng-click="go('/site/11')">11</div>
+    <site class="row1" id="site20">20</site><site class="row1" ng-click="go('/site/19')" id="site19">19</site><site class="row1" ng-click="go('/site/18')" id="site18">18</site><site class="row1"ng-click="go('/site/17')" id="site17">17</site><site class="row1" ng-click="go('/site/16')" id="site16">16</site><site class="row1" ng-click="go('/site/15')" id="15">15</site><site class="row1" ng-click="go('/site/14')" id="14">14</site><site class="row1" ng-click="go('/site/13')" id="13">13</site><site class="row1" ng-click="go('/site/12')" id="12">12</site><site class="row1" ng-click="go('/site/11')" id="11">11</site>
     <br>
-    <div class="row2">xx</div><div class="row2">xx</div><div class="row2">xx</div><div class="row2">xx</div><div class="row2">xx</div>
+    <!--<div class="row2">xx</div><div class="row2">xx</div><div class="row2">xx</div><div class="row2">xx</div><div class="row2">xx</div>-->
 </div>
-<div class="name-box">
+<!--<site>20</site><site>19</site>-->
+<div  id="home-view" class="name-box">
     <select ng-model="selectedName" ng-options="person.id as person.last_name + ', ' + person.first_name for person in getNames" ng-change="getInfo()">
         <option value="">Select Person</option>
     </select>

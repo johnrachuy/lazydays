@@ -2,23 +2,23 @@
     <h2 ng-model="site_number">Site # {{site_number}}</h2>
     <form name="siteForm">
         <label>
-            <input type="radio" ng-model="site.class" value="seasonal">
+            <input type="radio" ng-model="site.class" value="seasonal" ng-change="setSeasonal()">
             Seasonal
         </label><br/>
         <label>
-            <input type="radio" ng-model="site.class" value="monthly">
+            <input type="radio" ng-model="site.class" value="monthly" ng-change="setMonthly()">
             Monthly
         </label><br/>
         <label>
-            <input type="radio" ng-model="site.class" value="weekly">
+            <input type="radio" ng-model="site.class" value="weekly" ng-change="setWeekly()">
             Weekly
         </label><br/>
         <label>
-            <input type="radio" ng-model="site.class" value="holiday">
+            <input type="radio" ng-model="site.class" value="holiday" ng-change="setHoliday()">
             Holiday
         </label><br/>
         <label>
-            <input type="radio" ng-model="site.class" value="nightly">
+            <input type="radio" ng-model="site.class" value="nightly" ng-change="setNightly()">
             Nightly
         </label><br/>
     </form>
