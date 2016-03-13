@@ -78,3 +78,7 @@
 .booked {
     background-color: red;
 }
+
+.cal {
+    float: right;
+}

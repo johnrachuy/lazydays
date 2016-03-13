@@ -72,11 +72,22 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
         //console.log(reservation);
     };
 
+    $scope.editRes = function(index) {
+         $scope.editForm = $scope.siteData[index];
+        //console.log($scope.editForm);
+    };
+
+    //$scope.editRes = function() {
+    //    $http.get('/edit_res/'+ $scope.site_number).then(function(response) {
+    //        $scope.siteData = response.data;
+    //};
+
 
 
     function getSite() {
         $http.get('/get_site/'+ $scope.site_number).then(function(response) {
             $scope.siteData = response.data;
+            console.log($scope.siteData);
         });
     };
 

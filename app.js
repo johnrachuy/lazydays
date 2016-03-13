@@ -36,7 +36,7 @@ app.get('/get_names', function(req, res) {
     var results = [];
 
     pg.connect(connectionString, function(err, client, done) {
-        var query = client.query('SELECT last_name, first_name, id FROM customer ORDER BY last_name ASC');
+        var query = client.query('SELECT * FROM customer ORDER BY last_name ASC');
 
         // Stream results back one row at a time
         query.on('row', function(row) {
@@ -83,7 +83,7 @@ app.post('/post_res', function(req, res) {
     };
 
     pg.connect(connectionString, function(err, client, done) {
-        client.query("INSERT INTO customer (first_name, last_name, phone, email, street_address, city, state, zip_code) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id",
+        client.query("INSERT INTO customer (first_name, last_name, phone, email, street_address, city, state, zip_code) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING customer_id",
             [addEntry.first_name, addEntry.last_name, addEntry.phone, addEntry.email, addEntry.street_address, addEntry.city, addEntry.state, addEntry.zip_code],
             function (err, result) {
                 //console.log(result);
@@ -92,8 +92,8 @@ app.post('/post_res', function(req, res) {
                     console.log("Error inserting data: ", err);
                     res.send(false);
                 } else {
-                    client.query("INSERT INTO reservation (site_number, check_in, check_out, site_class, people_num, pet_num, rate, tax, hold, notes, canceled, customer_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)",
-                        [addEntry.site_number, addEntry.check_in, addEntry.check_out, addEntry.site_class, addEntry.people_num, addEntry.pet_num, addEntry.rate, addEntry.tax, addEntry.hold, addEntry.notes, addEntry.canceled, result.rows[0].id],
+                    client.query("INSERT INTO reservation (site_number, check_in, check_out, site_class, people_num, pet_num, rate, tax, hold, notes, canceled, fk_customer_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)",
+                        [addEntry.site_number, addEntry.check_in, addEntry.check_out, addEntry.site_class, addEntry.people_num, addEntry.pet_num, addEntry.rate, addEntry.tax, addEntry.hold, addEntry.notes, addEntry.canceled, result.rows[0].customer_id],
                     function (err, result) {
                         //console.log(result);
                         done();
@@ -114,7 +114,7 @@ app.get('/get_site/:site_number', function(req, res) {
     console.log(req.params);
 
     pg.connect(connectionString, function(err, client, done) {
-        var query = client.query('SELECT * FROM customer JOIN reservation ON customer_id=customer.id WHERE site_number = ($1)',
+        var query = client.query('SELECT * FROM customer JOIN reservation ON fk_customer_id=customer.customer_id WHERE site_number = ($1) ORDER BY reservation.check_in DESC',
             [req.params.site_number]);
 
         // Stream results back one row at a time
@@ -141,7 +141,7 @@ app.get('/get_info/:selectedName', function(req, res) {
     //console.log(req.params);
 
     pg.connect(connectionString, function(err, client, done) {
-        var query = client.query('SELECT * FROM customer JOIN reservation ON customer_id=customer.id WHERE customer_id = ($1)',
+        var query = client.query('SELECT * FROM customer JOIN reservation ON fk_customer_id=customer.customer_id WHERE fk_customer_id = ($1)',
             [req.params.selectedName]);
 
         // Stream results back one row at a time

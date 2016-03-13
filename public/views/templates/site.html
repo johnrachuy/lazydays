@@ -30,10 +30,11 @@
         <br>
         <label for="check_out">Check OUT:</label><input type="date" ng-model="check_out">
     </form>
+
     <form>
-        <input type="text" ng-model="first_name" placeholder="First Name" value="{{edit}}"><input type="text" ng-model="last_name" placeholder="Last Name" value="{{edit}}">
+        <input type="text" ng-model="first_name" placeholder="First Name"><input type="text" ng-model="last_name" placeholder="Last Name">
         <br>
-        <input type="tel" ng-model="phone" placeholder="Phone Number" value="{{edit}}"><input type="email" ng-model="email" placeholder="e-mail">
+        <input type="tel" ng-model="phone" placeholder="Phone Number"><input type="email" ng-model="email" placeholder="e-mail">
     </form>
     <form>
         <input type="text" ng-model="street_address" placeholder="Street Address">
@@ -106,10 +107,10 @@
     <br>
     <input type="text" ng-model="notes" placeholder="Notes">
     <br>
-    <button ng-click="postForm()">Save/Update</button>
+    <button ng-click="postForm()">Save New</button><button ng-click="updateForm()">Update Existing</button>
 </section>
 
 <div id="bottom" ng-repeat="site in siteData">
-    <p><a>view/edit</a> {{site.last_name}} {{site.first_name}} {{site.check_in | date}} {{site.check_out | date}} {{site.notes}}</p>
+    <p><button ng-click="editRes($index)">View/Edit</button> {{site.last_name}} {{site.first_name}} {{site.check_in | date}} {{site.check_out | date}} {{site.notes}}</p>
 
 </div>
