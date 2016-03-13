@@ -90,7 +90,8 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
 
     $scope.editRes = function(index) {
          $scope.editForm = $scope.siteData[index];
-        console.log($scope.editForm.site_class);
+        console.log($scope.editForm);
+
         $scope.site_class = $scope.editForm.site_class;
         //$scope.check_in = $scope.editForm.check_in;
         //$scope.check_out = $scope.editForm.check_out;
@@ -108,12 +109,59 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
         $scope.tax = $scope.editForm.tax;
         $scope.hold = $scope.editForm.hold;
         $scope.notes = $scope.editForm.notes;
+        //$scope.customer_id = $scope.edeitForm.customer_id;
+        //$scope.fk_customer_id = $scope.edeitForm.fk_customer_id;
+        //$scope.reservation_id = $scope.edeitForm.reservation_id;
     };
 
-    //$scope.editRes = function() {
-    //    $http.get('/edit_res/'+ $scope.site_number).then(function(response) {
-    //        $scope.siteData = response.data;
-    //};
+    $scope.updateForm = function() {
+        var update = {
+            site_number: $scope.site_number,
+            site_class: $scope.site_class,
+            check_in: $scope.check_in,
+            check_out: $scope.check_out,
+            first_name : $scope.first_name,
+            last_name: $scope.last_name,
+            phone: $scope.phone,
+            email: $scope.email,
+            street_address: $scope.street_address,
+            city: $scope.city,
+            state: $scope.state,
+            zip_code: $scope.zip_code,
+            people_num: $scope.people_num,
+            pet_num: $scope.pet_num,
+            rate: $scope.rate,
+            tax: $scope.tax,
+            hold: $scope.hold,
+            notes: $scope.notes,
+            customer_id: $scope.editForm.customer_id,
+            fk_customer_id: $scope.editForm.fk_customer_id,
+            reservation_id: $scope.editForm.reservation_id
+        };
+
+        $http.post('/update_res', update).then(function(response) {
+            $scope.update = response.data;
+            $scope.site_class = '',
+                $scope.check_in = '',
+                $scope.check_out = '',
+                $scope.first_name = '',
+                $scope.last_name = '',
+                $scope.phone = '',
+                $scope.email = '',
+                $scope.street_address = '',
+                $scope.city = '',
+                $scope.state = '',
+                $scope.zip_code = '',
+                $scope.people_num = '',
+                $scope.pet_num = '',
+                $scope.rate = '',
+                $scope.tax = '',
+                $scope.hold = '',
+                $scope.notes = ''
+
+            getSite();
+        });
+    };
 
 
 
