@@ -163,6 +163,35 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
         });
     };
 
+    $scope.cancelRes = function() {
+        var cancel = {
+            reservation_id: $scope.editForm.reservation_id
+        };
+
+        $http.put('/cancel_res', cancel).then(function(response) {
+            $scope.cancel = response.data;
+            $scope.site_class = '',
+                $scope.check_in = '',
+                $scope.check_out = '',
+                $scope.first_name = '',
+                $scope.last_name = '',
+                $scope.phone = '',
+                $scope.email = '',
+                $scope.street_address = '',
+                $scope.city = '',
+                $scope.state = '',
+                $scope.zip_code = '',
+                $scope.people_num = '',
+                $scope.pet_num = '',
+                $scope.rate = '',
+                $scope.tax = '',
+                $scope.hold = '',
+                $scope.notes = ''
+
+            getSite();
+        });
+    };
+
 
 
     function getSite() {

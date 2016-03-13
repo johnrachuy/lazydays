@@ -165,6 +165,28 @@ app.post('/update_res', function(req, res) {
     });
 });
 
+app.put('/cancel_res', function(req, res) {
+    //console.log(req.body.id);
+
+    var cancelEntry = {
+        reservation_id: req.body.reservation_id
+    };
+
+    pg.connect(connectionString, function(err, client, done) {
+        client.query("UPDATE reservation SET canceled = NOT canceled WHERE reservation_id = ($1)",
+            [cancelEntry.reservation_id],
+            function (err, result) {
+                done();
+                if(err) {
+                    console.log("Error inserting data: ", err);
+                    res.send(false);
+                } else {
+                    res.send(result);
+                }
+            });
+    });
+});
+
 app.get('/get_site/:site_number', function(req, res) {
     var results = [];
     //console.log(req.params);
