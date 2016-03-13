@@ -2,23 +2,23 @@
     <h2 ng-model="site_number">Site # {{site_number}}</h2>
     <form name="siteForm">
         <label>
-            <input type="radio" ng-model="site.class" value="seasonal" ng-change="setSeasonal()">
+            <input type="radio" ng-model="site_class" value="seasonal" ng-change="setSeasonal()">
             Seasonal
         </label><br/>
         <label>
-            <input type="radio" ng-model="site.class" value="monthly" ng-change="setMonthly()">
+            <input type="radio" ng-model="site_class" value="monthly" ng-change="setMonthly()">
             Monthly
         </label><br/>
         <label>
-            <input type="radio" ng-model="site.class" value="weekly" ng-change="setWeekly()">
+            <input type="radio" ng-model="site_class" value="weekly" ng-change="setWeekly()">
             Weekly
         </label><br/>
         <label>
-            <input type="radio" ng-model="site.class" value="holiday" ng-change="setHoliday()">
+            <input type="radio" ng-model="site_class" value="holiday" ng-change="setHoliday()">
             Holiday
         </label><br/>
         <label>
-            <input type="radio" ng-model="site.class" value="nightly" ng-change="setNightly()">
+            <input type="radio" ng-model="site_class" value="nightly" ng-change="setNightly()">
             Nightly
         </label><br/>
     </form>
@@ -30,6 +30,9 @@
         <br>
         <label for="check_out">Check OUT:</label><input type="date" ng-model="check_out">
     </form>
+    <select ng-model="selectedName" ng-options="person.customer_id as person.last_name + ', ' + person.first_name for person in getNames" ng-change="existingCust()">
+        <option value="">Select Person</option>
+    </select>
 
     <form>
         <input type="text" ng-model="first_name" placeholder="First Name"><input type="text" ng-model="last_name" placeholder="Last Name">
@@ -108,6 +111,7 @@
     <input type="text" ng-model="notes" placeholder="Notes">
     <br>
     <button ng-click="postForm()">Save New</button><button ng-click="updateForm()">Update Existing</button>
+    <!--{{editForm.first_name}}-->
 </section>
 
 <div id="bottom" ng-repeat="site in siteData">

@@ -111,7 +111,7 @@ app.post('/post_res', function(req, res) {
 
 app.get('/get_site/:site_number', function(req, res) {
     var results = [];
-    console.log(req.params);
+    //console.log(req.params);
 
     pg.connect(connectionString, function(err, client, done) {
         var query = client.query('SELECT * FROM customer JOIN reservation ON fk_customer_id=customer.customer_id WHERE site_number = ($1) ORDER BY reservation.check_in DESC',
@@ -143,6 +143,33 @@ app.get('/get_info/:selectedName', function(req, res) {
     pg.connect(connectionString, function(err, client, done) {
         var query = client.query('SELECT * FROM customer JOIN reservation ON fk_customer_id=customer.customer_id WHERE fk_customer_id = ($1)',
             [req.params.selectedName]);
+
+        // Stream results back one row at a time
+        query.on('row', function(row) {
+            results.push(row);
+        });
+
+        // close connection
+        query.on('end', function() {
+            done();
+            //console.log(results);
+            return res.json(results);
+
+        });
+
+        if(err) {
+            console.log(err);
+        }
+    });
+});
+
+app.get('/get_exist/:customer_id', function(req, res) {
+    var results = [];
+    //console.log(req.params);
+
+    pg.connect(connectionString, function(err, client, done) {
+        var query = client.query('SELECT * FROM customer WHERE customer_id = ($1)',
+            [req.params.customer_id]);
 
         // Stream results back one row at a time
         query.on('row', function(row) {

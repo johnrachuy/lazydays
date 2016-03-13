@@ -1,8 +1,10 @@
 myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '$routeParams', function($scope, $http, $location, $filter, $routeParams) {
 
     $scope.site_number = $routeParams.site_number;
+    $scope.selectedName = null;
+    $scope.getNames = [];
 
-    getSite();
+        getSite();
 
     $scope.setSeasonal = function() {
         $scope.rate = '1600.00';
@@ -27,7 +29,7 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
     $scope.postForm = function() {
         var reservation = {
             site_number: $scope.site_number,
-            site_class: $scope.site.class,
+            site_class: $scope.site_class,
             check_in: $scope.check_in,
             check_out: $scope.check_out,
             first_name : $scope.first_name,
@@ -48,7 +50,7 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
 
         $http.post('/post_res', reservation).then(function(response) {
                 $scope.post = response.data;
-                $scope.site.class = '',
+                $scope.site_class = '',
                 $scope.check_in = '',
                 $scope.check_out = '',
                 $scope.first_name = '',
@@ -72,9 +74,40 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
         //console.log(reservation);
     };
 
+    $http.get('/get_names').then(function(response) {
+        $scope.getNames = response.data;
+        //console.log($scope.getNames);
+    });
+
+    $scope.existingCust = function(){
+        $http.get('/get_exist/'+ $scope.selectedName).then(function(response) {
+            $scope.exist = response.data;
+            //$scope.first_name =
+            //$scope.last_name = $scope.existCust.last_name;
+            console.log($scope.exist);
+        });
+    };
+
     $scope.editRes = function(index) {
          $scope.editForm = $scope.siteData[index];
-        //console.log($scope.editForm);
+        console.log($scope.editForm.site_class);
+        $scope.site_class = $scope.editForm.site_class;
+        //$scope.check_in = $scope.editForm.check_in;
+        //$scope.check_out = $scope.editForm.check_out;
+        $scope.first_name = $scope.editForm.first_name;
+        $scope.last_name = $scope.editForm.last_name;
+        $scope.phone = $scope.editForm.phone;
+        $scope.email = $scope.editForm.email;
+        $scope.street_address = $scope.editForm.street_address;
+        $scope.city = $scope.editForm.city;
+        $scope.state = $scope.editForm.state;
+        $scope.zip_code = $scope.editForm.zip_code;
+        $scope.people_num = $scope.editForm.people_num;
+        $scope.pet_num = $scope.editForm.pet_num;
+        $scope.rate = $scope.editForm.rate;
+        $scope.tax = $scope.editForm.tax;
+        $scope.hold = $scope.editForm.hold;
+        $scope.notes = $scope.editForm.notes;
     };
 
     //$scope.editRes = function() {
@@ -87,7 +120,7 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
     function getSite() {
         $http.get('/get_site/'+ $scope.site_number).then(function(response) {
             $scope.siteData = response.data;
-            console.log($scope.siteData);
+            //console.log($scope.siteData);
         });
     };
 
