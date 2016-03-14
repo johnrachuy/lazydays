@@ -36,8 +36,6 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function($sc
         });
     };
 
-
-
     $scope.nextDay = function() {
         $scope.tomorrow = new Date();
     };
@@ -58,8 +56,6 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function($sc
             $scope.viewData = response.data;
         });
     };
-
-
 
     $scope.go = function(path) {
         $location.path(path);

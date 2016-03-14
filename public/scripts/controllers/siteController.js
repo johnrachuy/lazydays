@@ -4,7 +4,7 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
     $scope.selectedName = null;
     $scope.getNames = [];
 
-        getSite();
+    getSite();
 
     $scope.setSeasonal = function() {
         $scope.rate = '1600.00';
@@ -99,8 +99,8 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
         console.log($scope.editForm);
 
         $scope.site_class = $scope.editForm.site_class;
-        //$scope.check_in = $scope.editForm.check_in;
-        //$scope.check_out = $scope.editForm.check_out;
+        $scope.check_in = new Date($scope.editForm.check_in);
+        $scope.check_out = new Date($scope.editForm.check_out);
         $scope.first_name = $scope.editForm.first_name;
         $scope.last_name = $scope.editForm.last_name;
         $scope.phone = $scope.editForm.phone;
@@ -195,8 +195,6 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
         });
     };
 
-
-
     function getSite() {
         $http.get('/get_site/'+ $scope.site_number).then(function(response) {
             $scope.siteData = response.data;
@@ -207,8 +205,6 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
     $scope.go = function(path) {
         $location.path(path);
     };
-
-
 
     console.log('Site Controller');
 }]);

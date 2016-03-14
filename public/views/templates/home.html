@@ -1,9 +1,10 @@
 <div class="container">
 
     <div class="row">
-        <div class="two columns"><button ng-click="prevDay()">Prev</button></div><div class="two columns">{{date | date}}</div><div class="two columns"><button ng-click="nextDay()">Next</button></div><div class="six columns"> <select ng-model="selectedName" ng-options="person.customer_id as person.last_name + ', ' + person.first_name for person in getNames" ng-change="getInfo()">
-        <option value="">Select Person</option>
-    </select></div>
+        <div class="two columns"><button ng-click="prevDay()">Prev</button></div>
+        <div class="two columns">{{date | date}}</div>
+        <div class="two columns"><button ng-click="nextDay()">Next</button></div>
+        <div class="six columns"> <select ng-model="selectedName" ng-options="person.customer_id as person.last_name + ', ' + person.first_name for person in getNames" ng-change="getInfo()"><option value="">Select Person</option></select></div>
     </div>
 
     <div class="row">
@@ -12,7 +13,7 @@
     </div>
 
     <div class="row">
-        <div class="six columns"><site class="row1" ng-click="go('/site/20')" id="site20">20</site><site class="row1" ng-click="go('/site/19')" id="site19">19</site><site class="row1" ng-click="go('/site/18')" id="site18">18</site><site class="row1"ng-click="go('/site/17')" id="site17">17</site><site class="row1" ng-click="go('/site/16')" id="site16">16</site><site class="row1" ng-click="go('/site/15')" id="site15">15</site><site class="row1" ng-click="go('/site/14')" id="site14">14</site><site class="row1" ng-click="go('/site/13')" id="site13">13</site><site class="row1" ng-click="go('/site/12')" id="site12">12</site><site class="row1" ng-click="go('/site/11')" id="site11">11</site></div>
+        <div class="six columns">.</div>
         <div class="six columns"><input type="date" ng-model="date" ng-change="getMap()"></div>
     </div>
 

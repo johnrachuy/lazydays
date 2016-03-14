@@ -1,11 +1,7 @@
 <div class="container">
 
     <div class="row">
-        <div class="two columns" ng-model="site_number">Site # {{site_number}}</div><div class="ten columns"></div>
-    </div>
-
-    <div class="row">
-        <div class="two columns"<label><input type="radio" ng-model="site_class" value="seasonal" ng-change="setSeasonal()"><span class="label-body">Seasonal</span></label></div>
+        <div class="two columns" ng-model="site_number"><h4>Site # {{site_number}}</h4></div><div class="ten columns"></div>
         <div class="three columns"><label for="check_in">Check IN:</label><input class="u-full-width" type="date" ng-model="check_in"></div>
         <div class="three columns"><label for="check_out">Check OUT:</label><input class="u-full-width" type="date" ng-model="check_out"></div>
         <div class="two columns"><label for="people_num"># of People</label><input class="u-full-width" type="text" ng-model="people_num" placeholder="# of people"></div>
@@ -13,34 +9,34 @@
     </div>
 
     <div class="row">
-        <div class="two columns"<label><input type="radio" ng-model="site_class" value="monthly" ng-change="setMonthly()"><span class="label-body">Monthly</span></label></div>
+        <div class="two columns"<label><input type="radio" ng-model="site_class" value="seasonal" ng-change="setSeasonal()"><span class="label-body">Seasonal</span></label></div>
         <div class="six columns"><label for="selectedName">Select Existing Camper</label><select class="u-full-width" ng-model="selectedName" ng-options="person.customer_id as person.last_name + ', ' + person.first_name for person in getNames" ng-change="existingCust()"><option value="">Select Person</option></select></div>
         <div class="two columns"><label for="pet_num"># of Pets</label><input class="u-full-width" type="text" ng-model="pet_num" placeholder="# of pets"></div>
         <div class="two columns"><label for="tax">Tax</label><input class="u-full-width" type="text" ng-model="tax" placeholder="tax"></div>
     </div>
 
     <div class="row">
-        <div class="two columns"<label><input type="radio" ng-model="site_class" value="weekly" ng-change="setWeekly()"><span class="label-body">Weekly</span></label></div>
+        <div class="two columns"<label><input type="radio" ng-model="site_class" value="monthly" ng-change="setMonthly()"><span class="label-body">Monthly</span></label></div>
         <div class="three columns"><label for="first_name">First Name</label><input class="u-full-width" type="text" ng-model="first_name" placeholder="first name"></div>
         <div class="three columns"><label for="last_name">Last Name</label><input class="u-full-width" type="text" ng-model="last_name" placeholder="last name"></div>
         <div class="four columns"><label for="hold">Hold</label><input class="u-full-width" type="text" ng-model="hold" placeholder="hold"></div>
     </div>
 
     <div class="row">
-        <div class="two columns"<label><input type="radio" ng-model="site_class" value="holiday" ng-change="setHoliday()"><span class="label-body">Holiday</span></label></div>
+        <div class="two columns"<label><input type="radio" ng-model="site_class" value="weekly" ng-change="setWeekly()"><span class="label-body">Weekly</span></label></div>
         <div class="three columns"><label for="phone">Phone</label><input class="u-full-width" type="text" ng-model="phone" placeholder="phone"></div>
         <div class="three columns"><label for="email">E-Mail</label><input class="u-full-width" type="email" ng-model="email" placeholder="e-mail"></div>
         <div class="four columns"><label for="notes">Notes</label><input class="u-full-width" type="text" ng-model="notes" placeholder="notes"></div>
     </div>
 
     <div class="row">
-        <div class="two columns"<label><input type="radio" ng-model="site_class" value="nightly" ng-change="setNightly()"><span class="label-body">Nightly</span></label></div>
+        <div class="two columns"<label><input type="radio" ng-model="site_class" value="holiday" ng-change="setHoliday()"><span class="label-body">Holiday</span></label></div>
         <div class="six columns"><label for="street_address">Street Address</label><input class="u-full-width" type="text" ng-model="street_address" placeholder="street address"></div>
         <div class="four columns"></div>
     </div>
 
     <div class="row">
-        <div class="two columns">Something</div>
+        <div class="two columns"<label><input type="radio" ng-model="site_class" value="nightly" ng-change="setNightly()"><span class="label-body">Nightly</span></label></div>
         <div class="three columns"><label for="city">City</label><input class="u-full-width" type="text" ng-model="city" placeholder="city"></div>
         <div class="one column"><label for="state">State</label><select ng-model="state">
                 <option value="AL">AL</option>
