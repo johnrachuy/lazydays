@@ -25,60 +25,60 @@
 
 .row1 {
     display: inline;
-    padding: 20px;
+    padding: 10px;
     border: 1px solid black;
 }
 
-.row2 {
-    display: inline;
-    padding: 20px;
-    border: 1px solid black;
-}
+/*.row2 {*/
+    /*display: inline;*/
+    /*padding: 20px;*/
+    /*border: 1px solid black;*/
+/*}*/
 
-#left {
-    width: 150px;
-    float: left;
-    padding: 5px 15px;
-}
+/*#left {*/
+    /*width: 150px;*/
+    /*float: left;*/
+    /*padding: 5px 15px;*/
+/*}*/
 
-#middle {
-    width: 294px;
-    float: left;
-    padding: 5px 15px;
-    margin-top: 30px;
-}
+/*#middle {*/
+    /*width: 294px;*/
+    /*float: left;*/
+    /*padding: 5px 15px;*/
+    /*margin-top: 30px;*/
+/*}*/
 
-#right {
-    width: 270px;
-    float: left;
-    padding: 5px 15px;
-    margin-top: 30px;
-}
+/*#right {*/
+    /*width: 270px;*/
+    /*float: left;*/
+    /*padding: 5px 15px;*/
+    /*margin-top: 30px;*/
+/*}*/
 
-#bottom {
-    clear: both;
-    vertical-align: bottom;
-    width: 100%;
-}
+/*#bottom {*/
+    /*clear: both;*/
+    /*vertical-align: bottom;*/
+    /*width: 100%;*/
+/*}*/
 
-.date {
-    margin: 20px;
-}
+/*.date {*/
+    /*margin: 20px;*/
+/*}*/
 
-.name-box {
-    float: right;
-}
+/*.name-box {*/
+    /*float: right;*/
+/*}*/
 
-#home-view {
-    width: 450px;
-    height: 200px;
-    border: 1px solid black;
-}
+/*#home-view {*/
+    /*width: 450px;*/
+    /*height: 200px;*/
+    /*border: 1px solid black;*/
+/*}*/
 
 .booked {
     background-color: red;
 }
 
-.cal {
-    float: right;
-}
+/*.cal {*/
+    /*float: right;*/
+/*}*/

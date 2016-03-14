@@ -1,120 +1,108 @@
-<section id="left">
-    <h2 ng-model="site_number">Site # {{site_number}}</h2>
-    <form name="siteForm">
-        <label>
-            <input type="radio" ng-model="site_class" value="seasonal" ng-change="setSeasonal()">
-            Seasonal
-        </label><br/>
-        <label>
-            <input type="radio" ng-model="site_class" value="monthly" ng-change="setMonthly()">
-            Monthly
-        </label><br/>
-        <label>
-            <input type="radio" ng-model="site_class" value="weekly" ng-change="setWeekly()">
-            Weekly
-        </label><br/>
-        <label>
-            <input type="radio" ng-model="site_class" value="holiday" ng-change="setHoliday()">
-            Holiday
-        </label><br/>
-        <label>
-            <input type="radio" ng-model="site_class" value="nightly" ng-change="setNightly()">
-            Nightly
-        </label><br/>
-    </form>
-</section>
+<div class="container">
 
-<section id="middle">
-    <form>
-        <label for="check_in">Check IN:</label><input type="date" ng-model="check_in">
-        <br>
-        <label for="check_out">Check OUT:</label><input type="date" ng-model="check_out">
-    </form>
-    <select ng-model="selectedName" ng-options="person.customer_id as person.last_name + ', ' + person.first_name for person in getNames" ng-change="existingCust()">
-        <option value="">Select Person</option>
-    </select>
+    <div class="row">
+        <div class="two columns" ng-model="site_number">Site # {{site_number}}</div><div class="ten columns"></div>
+    </div>
 
-    <form>
-        <input type="text" ng-model="first_name" placeholder="First Name"><input type="text" ng-model="last_name" placeholder="Last Name">
-        <br>
-        <input type="tel" ng-model="phone" placeholder="Phone Number"><input type="email" ng-model="email" placeholder="e-mail">
-    </form>
-    <form>
-        <input type="text" ng-model="street_address" placeholder="Street Address">
-        <br>
-        <input type="text" ng-model="city" placeholder="City">
-        <select ng-model="state">
-            <option value="AL">Alabama</option>
-            <option value="AK">Alaska</option>
-            <option value="AZ">Arizona</option>
-            <option value="AR">Arkansas</option>
-            <option value="CA">California</option>
-            <option value="CO">Colorado</option>
-            <option value="CT">Connecticut</option>
-            <option value="DE">Delaware</option>
-            <option value="DC">District Of Columbia</option>
-            <option value="FL">Florida</option>
-            <option value="GA">Georgia</option>
-            <option value="HI">Hawaii</option>
-            <option value="ID">Idaho</option>
-            <option value="IL">Illinois</option>
-            <option value="IN">Indiana</option>
-            <option value="IA">Iowa</option>
-            <option value="KS">Kansas</option>
-            <option value="KY">Kentucky</option>
-            <option value="LA">Louisiana</option>
-            <option value="ME">Maine</option>
-            <option value="MD">Maryland</option>
-            <option value="MA">Massachusetts</option>
-            <option value="MI">Michigan</option>
-            <option value="MN">Minnesota</option>
-            <option value="MS">Mississippi</option>
-            <option value="MO">Missouri</option>
-            <option value="MT">Montana</option>
-            <option value="NE">Nebraska</option>
-            <option value="NV">Nevada</option>
-            <option value="NH">New Hampshire</option>
-            <option value="NJ">New Jersey</option>
-            <option value="NM">New Mexico</option>
-            <option value="NY">New York</option>
-            <option value="NC">North Carolina</option>
-            <option value="ND">North Dakota</option>
-            <option value="OH">Ohio</option>
-            <option value="OK">Oklahoma</option>
-            <option value="OR">Oregon</option>
-            <option value="PA">Pennsylvania</option>
-            <option value="RI">Rhode Island</option>
-            <option value="SC">South Carolina</option>
-            <option value="SD">South Dakota</option>
-            <option value="TN">Tennessee</option>
-            <option value="TX">Texas</option>
-            <option value="UT">Utah</option>
-            <option value="VT">Vermont</option>
-            <option value="VA">Virginia</option>
-            <option value="WA">Washington</option>
-            <option value="WV">West Virginia</option>
-            <option value="WI">Wisconsin</option>
-            <option value="WY">Wyoming</option>
-        </select>
-        <!--<input type="text" ng-model="state" placeholder="State">-->
-        <input type="text" ng-model="zip_code" placeholder="Zip Code">
-    </form>
-</section>
+    <div class="row">
+        <div class="two columns"<label><input type="radio" ng-model="site_class" value="seasonal" ng-change="setSeasonal()"><span class="label-body">Seasonal</span></label></div>
+        <div class="three columns"><label for="check_in">Check IN:</label><input class="u-full-width" type="date" ng-model="check_in"></div>
+        <div class="three columns"><label for="check_out">Check OUT:</label><input class="u-full-width" type="date" ng-model="check_out"></div>
+        <div class="two columns"><label for="people_num"># of People</label><input class="u-full-width" type="text" ng-model="people_num" placeholder="# of people"></div>
+        <div class="two columns"><label for="rate">Rate</label><input class="u-full-width" type="text" ng-model="rate" placeholder="rate"></div>
+    </div>
 
-<section id="right">
-    <input type="text" ng-model="people_num" placeholder="Number of People"><input type="text" ng-model="rate" placeholder="Rate">
-    <br>
-    <input type="text" ng-model="pet_num" placeholder="Number of Pets"><input type="text" ng-model="tax" placeholder="Tax">
-    <br>
-    <input type="text" ng-model="hold" placeholder="Hold">
-    <br>
-    <input type="text" ng-model="notes" placeholder="Notes">
-    <br>
-    <button ng-click="postForm()">Save New</button><button ng-click="updateForm()">Update Existing</button><button ng-click="cancelRes()">Cancel Reservation</button>
-    <!--{{editForm.first_name}}-->
-</section>
+    <div class="row">
+        <div class="two columns"<label><input type="radio" ng-model="site_class" value="monthly" ng-change="setMonthly()"><span class="label-body">Monthly</span></label></div>
+        <div class="six columns"><label for="selectedName">Select Existing Camper</label><select class="u-full-width" ng-model="selectedName" ng-options="person.customer_id as person.last_name + ', ' + person.first_name for person in getNames" ng-change="existingCust()"><option value="">Select Person</option></select></div>
+        <div class="two columns"><label for="pet_num"># of Pets</label><input class="u-full-width" type="text" ng-model="pet_num" placeholder="# of pets"></div>
+        <div class="two columns"><label for="tax">Tax</label><input class="u-full-width" type="text" ng-model="tax" placeholder="tax"></div>
+    </div>
 
-<div id="bottom" ng-repeat="site in siteData">
-    <p><button ng-click="editRes($index)">View/Edit</button> {{site.last_name}} {{site.first_name}} {{site.check_in | date}} {{site.check_out | date}} {{site.notes}}</p>
+    <div class="row">
+        <div class="two columns"<label><input type="radio" ng-model="site_class" value="weekly" ng-change="setWeekly()"><span class="label-body">Weekly</span></label></div>
+        <div class="three columns"><label for="first_name">First Name</label><input class="u-full-width" type="text" ng-model="first_name" placeholder="first name"></div>
+        <div class="three columns"><label for="last_name">Last Name</label><input class="u-full-width" type="text" ng-model="last_name" placeholder="last name"></div>
+        <div class="four columns"><label for="hold">Hold</label><input class="u-full-width" type="text" ng-model="hold" placeholder="hold"></div>
+    </div>
+
+    <div class="row">
+        <div class="two columns"<label><input type="radio" ng-model="site_class" value="holiday" ng-change="setHoliday()"><span class="label-body">Holiday</span></label></div>
+        <div class="three columns"><label for="phone">Phone</label><input class="u-full-width" type="text" ng-model="phone" placeholder="phone"></div>
+        <div class="three columns"><label for="email">E-Mail</label><input class="u-full-width" type="email" ng-model="email" placeholder="e-mail"></div>
+        <div class="four columns"><label for="notes">Notes</label><input class="u-full-width" type="text" ng-model="notes" placeholder="notes"></div>
+    </div>
+
+    <div class="row">
+        <div class="two columns"<label><input type="radio" ng-model="site_class" value="nightly" ng-change="setNightly()"><span class="label-body">Nightly</span></label></div>
+        <div class="six columns"><label for="street_address">Street Address</label><input class="u-full-width" type="text" ng-model="street_address" placeholder="street address"></div>
+        <div class="four columns"></div>
+    </div>
+
+    <div class="row">
+        <div class="two columns">Something</div>
+        <div class="three columns"><label for="city">City</label><input class="u-full-width" type="text" ng-model="city" placeholder="city"></div>
+        <div class="one column"><label for="state">State</label><select ng-model="state">
+                <option value="AL">AL</option>
+                <option value="AK">AK</option>
+                <option value="AZ">AZ</option>
+                <option value="AR">AR</option>
+                <option value="CA">CA</option>
+                <option value="CO">CO</option>
+                <option value="CT">CT</option>
+                <option value="DE">DE</option>
+                <option value="DC">DC</option>
+                <option value="FL">FL</option>
+                <option value="GA">GA</option>
+                <option value="HI">HI</option>
+                <option value="ID">ID</option>
+                <option value="IL">IL</option>
+                <option value="IN">IN</option>
+                <option value="IA">IA</option>
+                <option value="KS">KS</option>
+                <option value="KY">KY</option>
+                <option value="LA">LA</option>
+                <option value="ME">ME</option>
+                <option value="MD">MD</option>
+                <option value="MA">MA</option>
+                <option value="MI">MI</option>
+                <option value="MN">MN</option>
+                <option value="MS">MS</option>
+                <option value="MO">MO</option>
+                <option value="MT">MT</option>
+                <option value="NE">NE</option>
+                <option value="NV">NV</option>
+                <option value="NH">NH</option>
+                <option value="NJ">NJ</option>
+                <option value="NM">NM</option>
+                <option value="NY">NY</option>
+                <option value="NC">NC</option>
+                <option value="ND">ND</option>
+                <option value="OH">OH</option>
+                <option value="OK">OK</option>
+                <option value="OR">OR</option>
+                <option value="PA">PA</option>
+                <option value="RI">RI</option>
+                <option value="SC">SC</option>
+                <option value="SD">SD</option>
+                <option value="TN">TN</option>
+                <option value="TX">TX</option>
+                <option value="UT">UT</option>
+                <option value="VT">VT</option>
+                <option value="VA">VA</option>
+                <option value="WA">WA</option>
+                <option value="WV">WV</option>
+                <option value="WI">WI</option>
+                <option value="WY">WY</option>
+            </select></div>
+        <div class="two columns"><label for="zip_code">Zip Code</label><input class="u-full-width" type="text" ng-model="zip_code" placeholder="zip code"></div>
+        <div class="one columns"><button ng-click="postForm()">S</button></div>
+        <div class="one columns"><button ng-click="updateForm()">U</button></div>
+        <div class="one columns"><button ng-click="cancelRes()">C</button></div>
+    </div>
+
+    <div class="row">
+        <div class="twelve columns"><table class="u-full-width"><thead><tr><th>View/Edit</th><th>Last</th><th>First</th><th>Check IN</th><th>Check OUT</th><th>Notes</th></tr></thead><tbody ng-repeat="site in siteData"><tr><td><button ng-click="editRes($index)">View/Edit</button></td><td>{{site.last_name}}</td><td>{{site.first_name}}</td><td>{{site.check_in | date}}</td><td>{{site.check_out | date}}</td><td>{{site.notes}}</td></tr></tbody></table></div>
+    </div>
 
 </div>

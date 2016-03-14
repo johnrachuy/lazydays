@@ -76,15 +76,21 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
 
     $http.get('/get_names').then(function(response) {
         $scope.getNames = response.data;
-        //console.log($scope.getNames);
+        console.log($scope.getNames);
     });
 
     $scope.existingCust = function(){
         $http.get('/get_exist/'+ $scope.selectedName).then(function(response) {
             $scope.exist = response.data;
-            //$scope.first_name =
-            //$scope.last_name = $scope.existCust.last_name;
-            console.log($scope.exist);
+            $scope.first_name = $scope.exist[0].first_name;
+            $scope.last_name = $scope.exist[0].last_name;
+            $scope.phone = $scope.exist[0].phone;
+            $scope.email = $scope.exist[0].email;
+            $scope.street_address = $scope.exist[0].street_address;
+            $scope.city = $scope.exist[0].city;
+            $scope.state = $scope.exist[0].state;
+            $scope.zip_code = $scope.exist[0].zip_code;
+            //console.log($scope.exist[0].phone);
         });
     };
 
@@ -109,9 +115,6 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
         $scope.tax = $scope.editForm.tax;
         $scope.hold = $scope.editForm.hold;
         $scope.notes = $scope.editForm.notes;
-        //$scope.customer_id = $scope.edeitForm.customer_id;
-        //$scope.fk_customer_id = $scope.edeitForm.fk_customer_id;
-        //$scope.reservation_id = $scope.edeitForm.reservation_id;
     };
 
     $scope.updateForm = function() {
