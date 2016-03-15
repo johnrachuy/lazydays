@@ -57,7 +57,8 @@ app.get('/get_names', function(req, res) {
 });
 
 app.post('/post_res', function(req, res) {
-    //console.log(req);
+    console.log('New customer, new reservation');
+    console.log(req.body);
 
     var addEntry = {
         first_name: req.body.first_name,
@@ -109,8 +110,43 @@ app.post('/post_res', function(req, res) {
     });
 });
 
+app.post('/post_exist', function(req, res) {
+    console.log('Existing customer, new reservation');
+    console.log(req.body);
+
+    var addEntry = {
+        site_number: req.body.site_number,
+        check_in: req.body.check_in,
+        check_out: req.body.check_out,
+        site_class: req.body.site_class,
+        people_num: req.body.people_num,
+        pet_num: req.body.pet_num,
+        rate: req.body.rate,
+        tax: req.body.tax,
+        hold: req.body.hold,
+        notes: req.body.notes,
+        canceled: 'false',
+        fk_customer_id: req.body.customer_id
+
+    };
+
+    pg.connect(connectionString, function(err, client, done) {
+        client.query("INSERT INTO reservation (site_number, check_in, check_out, site_class, people_num, pet_num, rate, tax, hold, notes, canceled, fk_customer_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)",
+            [addEntry.site_number, addEntry.check_in, addEntry.check_out, addEntry.site_class, addEntry.people_num, addEntry.pet_num, addEntry.rate, addEntry.tax, addEntry.hold, addEntry.notes, addEntry.canceled, addEntry.fk_customer_id],
+            function (err, result) {
+                done();
+                if(err) {
+                    console.log("Error inserting data: ", err);
+                    res.send(false);
+                } else {
+                    res.send(result);
+                }
+            });
+    });
+});
+
 app.post('/update_res', function(req, res) {
-    //console.log(req.body);
+    console.log('Updating existing reservation');
 
     var updateEntry = {
         customer_id: req.body.customer_id,
