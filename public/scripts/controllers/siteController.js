@@ -55,7 +55,7 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
             fk_customer_id: $scope.fk_customer_id
         };
 
-        if ($scope.reservation_id > 1) {
+        if ($scope.reservation_id > 0) {
             console.log('existing reservation');
 
             $http.post('/update_res', reservation).then(function(response) {
@@ -81,7 +81,7 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
 
                 getSite();
             });
-        } else if ($scope.customer_id > 1) {
+        } else if ($scope.customer_id > 0) {
             //if ($scope.exist[0]) {
                 console.log('existing customer');
 

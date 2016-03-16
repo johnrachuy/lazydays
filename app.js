@@ -57,8 +57,8 @@ app.get('/get_names', function(req, res) {
 });
 
 app.post('/post_res', function(req, res) {
-    console.log('New customer, new reservation');
-    console.log(req.body);
+    //console.log('New customer, new reservation');
+    //console.log(req.body);
 
     var addEntry = {
         first_name: req.body.first_name,
@@ -80,7 +80,6 @@ app.post('/post_res', function(req, res) {
         hold: req.body.hold,
         notes: req.body.notes,
         canceled: 'false'
-
     };
 
     pg.connect(connectionString, function(err, client, done) {
@@ -111,10 +110,19 @@ app.post('/post_res', function(req, res) {
 });
 
 app.post('/post_exist', function(req, res) {
-    console.log('Existing customer, new reservation');
-    console.log(req.body);
+    //console.log('Existing customer, new reservation');
+    //console.log(req.body);
 
-    var addEntry = {
+    var addNewExist = {
+        customer_id: req.body.customer_id,
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        phone: req.body.phone,
+        email: req.body.email,
+        street_address: req.body.street_address,
+        city: req.body.city,
+        state: req.body.state,
+        zip_code: req.body.zip_code,
         site_number: req.body.site_number,
         check_in: req.body.check_in,
         check_out: req.body.check_out,
@@ -127,29 +135,40 @@ app.post('/post_exist', function(req, res) {
         notes: req.body.notes,
         canceled: 'false',
         fk_customer_id: req.body.customer_id
-
     };
 
     pg.connect(connectionString, function(err, client, done) {
-        client.query("INSERT INTO reservation (site_number, check_in, check_out, site_class, people_num, pet_num, rate, tax, hold, notes, canceled, fk_customer_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)",
-            [addEntry.site_number, addEntry.check_in, addEntry.check_out, addEntry.site_class, addEntry.people_num, addEntry.pet_num, addEntry.rate, addEntry.tax, addEntry.hold, addEntry.notes, addEntry.canceled, addEntry.fk_customer_id],
+        client.query("UPDATE customer SET (first_name, last_name, phone, email, street_address, city, state, zip_code) = ($1, $2, $3, $4, $5, $6, $7, $8) WHERE customer_id = ($9)",
+            [addNewExist.first_name, addNewExist.last_name, addNewExist.phone, addNewExist.email, addNewExist.street_address, addNewExist.city, addNewExist.state, addNewExist.zip_code, addNewExist.customer_id],
             function (err, result) {
+                //console.log(result);
                 done();
                 if(err) {
                     console.log("Error inserting data: ", err);
                     res.send(false);
                 } else {
-                    res.send(result);
+                    client.query("INSERT INTO reservation (site_number, check_in, check_out, site_class, people_num, pet_num, rate, tax, hold, notes, canceled, fk_customer_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)",
+                        [addNewExist.site_number, addNewExist.check_in, addNewExist.check_out, addNewExist.site_class, addNewExist.people_num, addNewExist.pet_num, addNewExist.rate, addNewExist.tax, addNewExist.hold, addNewExist.notes, addNewExist.canceled, addNewExist.fk_customer_id],
+                        function (err, result) {
+                            //console.log(result);
+                            done();
+                            if(err) {
+                                console.log("Error inserting data: ", err);
+                                res.send(false);
+                            } else {
+                                res.send(result);
+                            }
+                        });
                 }
             });
     });
 });
 
 app.post('/update_res', function(req, res) {
-    console.log('Updating existing reservation');
+    //console.log('Updating existing reservation');
+    //console.log(req.body);
 
     var updateEntry = {
-        customer_id: req.body.customer_id,
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         phone: req.body.phone,
@@ -171,12 +190,11 @@ app.post('/update_res', function(req, res) {
         canceled: 'false',
         fk_customer_id: req.body.fk_customer_id,
         reservation_id: req.body.reservation_id
-
     };
 
     pg.connect(connectionString, function(err, client, done) {
         client.query("UPDATE customer SET (first_name, last_name, phone, email, street_address, city, state, zip_code) = ($1, $2, $3, $4, $5, $6, $7, $8) WHERE customer_id = ($9)",
-            [updateEntry.first_name, updateEntry.last_name, updateEntry.phone, updateEntry.email, updateEntry.street_address, updateEntry.city, updateEntry.state, updateEntry.zip_code, updateEntry.customer_id],
+            [updateEntry.first_name, updateEntry.last_name, updateEntry.phone, updateEntry.email, updateEntry.street_address, updateEntry.city, updateEntry.state, updateEntry.zip_code, updateEntry.fk_customer_id],
             function (err, result) {
                 //console.log(result);
                 done();
@@ -255,7 +273,7 @@ app.get('/get_info/:selectedName', function(req, res) {
     //console.log(req.params);
 
     pg.connect(connectionString, function(err, client, done) {
-        var query = client.query('SELECT * FROM customer JOIN reservation ON fk_customer_id=customer.customer_id WHERE fk_customer_id = ($1)',
+        var query = client.query('SELECT * FROM customer JOIN reservation ON fk_customer_id=customer.customer_id WHERE fk_customer_id = ($1) ORDER BY reservation.check_in DESC',
             [req.params.selectedName]);
 
         // Stream results back one row at a time
