@@ -88,7 +88,7 @@
 
    <div class="row">
        <div class="jumbotron">
-           <div class="twelve columns"><table class="u-full-width"><thead><tr><th>View/Edit</th><th>Last</th><th>First</th><th>Check IN</th><th>Check OUT</th><th>Notes</th></tr></thead><tbody ng-repeat="site in siteData"><tr><td><button ng-click="editRes($index)">View/Edit</button></td><td>{{site.last_name}}</td><td>{{site.first_name}}</td><td>{{site.check_in | date}}</td><td>{{site.check_out | date}}</td><td>{{site.notes}}</td></tr></tbody></table></div>
+           <table class="table-striped"><thead><tr><th>View/Edit</th><th>Last</th><th>First</th><th>Check IN</th><th>Check OUT</th><th>Notes</th></tr></thead><tbody ng-repeat="site in siteData"><tr><td><button ng-click="editRes($index)">View/Edit</button></td><td>{{site.last_name}}</td><td>{{site.first_name}}</td><td>{{site.check_in | date}}</td><td>{{site.check_out | date}}</td><td>{{site.notes}}</td></tr></tbody></table>
        </div>
    </div>
 
