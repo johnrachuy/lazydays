@@ -88,9 +88,51 @@ nav li a:hover {
 }
 
 .brown {
-    background-color: saddlebrown;
+    background-color: tan;
 }
 
 .blue {
     background-color: dodgerblue;
+}
+
+/*.t-l {*/
+    /*border-top: solid 1px black;*/
+    /*border-left: solid 1px black;*/
+/*}*/
+
+/*.b-l {*/
+    /*border-bottom: solid 1px black;*/
+    /*border-left: solid 1px black;*/
+/*}*/
+
+/*.t-r-l {*/
+    /*border-top: solid 1px black;*/
+    /*border-right: solid 1px black;*/
+    /*border-left: solid 1px black;*/
+/*}*/
+
+/*.r-b-l {*/
+    /*border-right: solid 1px black;*/
+    /*border-bottom: solid 1px black;*/
+    /*border-left: solid 1px black;*/
+/*}*/
+
+.top-row {
+    height: 40px;
+}
+
+.top-row td {
+    width: 10px;
+}
+
+.jumbotron {
+    background-color: #0FA0CE;
+}
+
+.jumbotron th {
+    color: white;
+}
+
+#back  {
+    background-color: #0FA0CE;
 }
