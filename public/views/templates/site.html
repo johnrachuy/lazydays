@@ -11,9 +11,9 @@
         </div>
 
         <div class="col-md-6">
-            <label for="check_in">Check IN:</label><label for="check_out">Check OUT:</label><br><input type="date" ng-model="check_in"><input type="date" ng-model="check_out"><br>
-            <label for="selectedName">Select Existing Camper</label><br><input type="text" class="u-full-width" ng-model="selectedName" typeahead-on-select="existingCust()" uib-typeahead="person.customer_id as person.last_name + ', ' + person.first_name for person in getNames | filter:$viewValue | limitTo:8" class="form-control" placeholder="Existing Customers"><br>
-            <label for="first_name">First Name</label><label for="last_name">Last Name</label><br><input type="text" ng-model="first_name" placeholder="first name"><input type="text" ng-model="last_name" placeholder="last name"><br>
+            <label for="check_in" class="form-label-right">Check IN:</label><label for="check_out" class="form-label-left">Check OUT:</label><br><input type="date" ng-model="check_in" class="form-input-right"><input type="date" ng-model="check_out" class="form-input-left"><br>
+            <label for="selectedName">Select Existing Camper</label><br><input type="text" class="form-control" ng-model="selectedName" typeahead-on-select="existingCust()" uib-typeahead="person.customer_id as person.last_name + ', ' + person.first_name for person in getNames | filter:$viewValue | limitTo:8" class="form-control" placeholder="Existing Customers"><br>
+            <label for="first_name" class="form-label-right">First Name</label><label for="last_name" class="form-label-left">Last Name</label><br><input type="text" ng-model="first_name" placeholder="first name" class="form-input-right"><input type="text" ng-model="last_name" placeholder="last name" class="form-input-left"><br>
             <label for="phone">Phone</label><label for="email">E-Mail</label><br><input type="text" ng-model="phone" placeholder="phone"><input type="email" ng-model="email" placeholder="e-mail"><br>
             <label for="street_address">Street Address</label><br>
             <input class="u-full-width" type="text" ng-model="street_address" placeholder="street address"><br>
@@ -88,7 +88,7 @@
 
    <div class="row">
        <div class="jumbotron">
-           <table class="table-striped"><thead><tr><th>View/Edit</th><th>Last</th><th>First</th><th>Check IN</th><th>Check OUT</th><th>Notes</th></tr></thead><tbody ng-repeat="site in siteData"><tr><td><button ng-click="editRes($index)">View/Edit</button></td><td>{{site.last_name}}</td><td>{{site.first_name}}</td><td>{{site.check_in | date}}</td><td>{{site.check_out | date}}</td><td>{{site.notes}}</td></tr></tbody></table>
+           <table class="table table-striped"><thead><tr><th>View/Edit</th><th>Last</th><th>First</th><th>Check IN</th><th>Check OUT</th><th>Notes</th></tr></thead><tbody ng-repeat="site in siteData"><tr><td><button ng-click="editRes($index)">View/Edit</button></td><td>{{site.last_name}}</td><td>{{site.first_name}}</td><td>{{site.check_in | date}}</td><td>{{site.check_out | date}}</td><td>{{site.notes}}</td></tr></tbody></table>
        </div>
    </div>
 

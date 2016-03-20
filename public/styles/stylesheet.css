@@ -43,3 +43,38 @@ nav li a:hover {
     color: black;
 }
 
+.form-label-left {
+    margin-left: 100px;
+}
+
+.form-label-right {
+    margin-right: 10px;
+}
+
+.form-input-left {
+    margin-left: 5px;
+}
+
+.form-input-right {
+    margin-right: 10px;
+}
+
+.map-date {
+    text-align: center;
+}
+
+.table-map {
+    width: 560px;
+    color: white;
+    text-align: center;
+    background-color: green;
+    border: solid 5px black;
+}
+
+.brown {
+    background-color: saddlebrown;
+}
+
+.blue {
+    background-color: dodgerblue;
+}
