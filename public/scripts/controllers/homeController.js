@@ -1,16 +1,6 @@
 myApp.controller('HomeController', ['$scope', '$http', '$location', function($scope, $http, $location) {
 
     $scope.date = new Date();
-    //$scope.preday = new Date().getDate() - 1;
-    //$scope.nextday = new Date().getDate() + 1;
-    //$scope.premonth = new Date().getMonth() - 1;
-    //$scope.nextmonth = new Date().getMonth() + 1;
-    //$scope.curentyear = new Date().getFullYear();
-
-
-    //$scope.date = new Date();
-    //$scope.tomorrow = new Date();
-
 
     $scope.getMap = function () {
         getMap();
@@ -53,22 +43,9 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function($sc
                             $csite.addClass('nightly');
                             break;
                     };
-                    // site is NOT null
-
-
                 }
             }
-
         });
-    };
-
-    $scope.nextDay = function() {
-        //$scope.tomorrow.setDate($scope.tomorrow.getDate() + 1);
-        //$scope.tomorrow = new Date();
-    };
-
-    $scope.prevDay = function() {
-
     };
 
     $scope.selectedName = null;

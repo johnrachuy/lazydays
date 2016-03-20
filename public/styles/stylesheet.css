@@ -1,25 +1,28 @@
-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-}
+/*nav ul {*/
+    /*list-style-type: none;*/
+    /*margin: 0;*/
+    /*padding: 0;*/
+    /*overflow: hidden;*/
+    /*background-color: #333;*/
+/*}*/
 
-nav li {
-    float: left;
-}
+/*nav li {*/
+    /*float: left;*/
+/*}*/
 
-nav li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
+/*nav li a {*/
+    /*display: block;*/
+    /*color: white;*/
+    /*text-align: center;*/
+    /*padding: 14px 16px;*/
+    /*text-decoration: none;*/
+/*}*/
 
-nav li a:hover {
-    background-color: #111;
+/*nav li a:hover {*/
+    /*background-color: #111;*/
+/*}*/
+body {
+    background: lightgray;
 }
 
 .row1 {
@@ -33,7 +36,7 @@ nav li a:hover {
 }
 
 .monthly {
-    background-color: yellow;
+    background-color: mediumpurple;
 }
 
 .weekly {
@@ -95,34 +98,8 @@ nav li a:hover {
     background-color: dodgerblue;
 }
 
-/*.t-l {*/
-    /*border-top: solid 1px black;*/
-    /*border-left: solid 1px black;*/
-/*}*/
-
-/*.b-l {*/
-    /*border-bottom: solid 1px black;*/
-    /*border-left: solid 1px black;*/
-/*}*/
-
-/*.t-r-l {*/
-    /*border-top: solid 1px black;*/
-    /*border-right: solid 1px black;*/
-    /*border-left: solid 1px black;*/
-/*}*/
-
-/*.r-b-l {*/
-    /*border-right: solid 1px black;*/
-    /*border-bottom: solid 1px black;*/
-    /*border-left: solid 1px black;*/
-/*}*/
-
 .top-row {
     height: 40px;
-}
-
-.top-row td {
-    width: 10px;
 }
 
 .jumbotron {
@@ -131,8 +108,4 @@ nav li a:hover {
 
 .jumbotron th {
     color: white;
-}
-
-#back  {
-    background-color: #0FA0CE;
 }

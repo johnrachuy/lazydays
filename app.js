@@ -322,6 +322,62 @@ app.get('/get_exist/:customer_id', function(req, res) {
     });
 });
 
+app.post('/get_exist_conflicts', function(req, res) {
+    var results = [];
+    console.log(req.body);
+
+    pg.connect(connectionString, function(err, client, done) {
+        var query = client.query('SELECT * FROM reservation WHERE (check_in < ($1) AND ($2) < check_out) AND site_number = ($3) AND reservation_id = ($4)',
+            [req.body.check_in, req.body.check_out, req.body.site_number, req.body.reservation_id]);
+
+        // Stream results back one row at a time
+        query.on('row', function(row) {
+            results.push(row);
+        });
+
+        // close connection
+        query.on('end', function() {
+            done();
+            //console.log(results);
+            return res.json(results);
+
+        });
+
+        if(err) {
+            console.log(err);
+        }
+    });
+});
+
+app.post('/get_new_conflicts', function(req, res) {
+    var results = [];
+    //console.log(req.body);
+
+    pg.connect(connectionString, function(err, client, done) {
+        var query = client.query('SELECT * FROM reservation WHERE (check_in < ($1) AND ($2) < check_out) AND site_number = ($3)',
+            [req.body.check_in, req.body.check_out, req.body.site_number]);
+
+        // Stream results back one row at a time
+        query.on('row', function(row) {
+            results.push(row);
+        });
+
+        // close connection
+        query.on('end', function() {
+            done();
+            //console.log(results);
+            return res.json(results);
+
+        });
+
+        if(err) {
+            console.log(err);
+        }
+    });
+});
+
+
+
 // Serve back static files
 app.use(express.static('public'));
 app.use(express.static('public/views'));

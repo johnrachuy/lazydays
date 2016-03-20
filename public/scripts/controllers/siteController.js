@@ -58,33 +58,51 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
         if ($scope.reservation_id > 0) {
             console.log('existing reservation');
 
-            $http.post('/update_res', reservation).then(function(response) {
-                $scope.post = response.data;
-
-                $scope.site_class = null;
-                $scope.check_in = null;
-                $scope.check_out = null;
-                $scope.first_name = null;
-                $scope.last_name = null;
-                $scope.phone = null;
-                $scope.email = null;
-                $scope.street_address = null;
-                $scope.city = null;
-                $scope.state = null;
-                $scope.zip_code = null;
-                $scope.people_num = null;
-                $scope.pet_num = null;
-                $scope.rate = null;
-                $scope.tax = null;
-                $scope.hold = null;
-                $scope.notes = null;
-
-                getSite();
+            $http.post('/get_exist_conflicts', reservation).then(function(response) {
+                $scope.conflict = response.data;
+                console.log(response.data);
             });
+
+            if (!$scope.conflict) {
+                $http.post('/update_res', reservation).then(function(response) {
+                    $scope.post = response.data;
+
+                    $scope.site_class = null;
+                    $scope.check_in = null;
+                    $scope.check_out = null;
+                    $scope.first_name = null;
+                    $scope.last_name = null;
+                    $scope.phone = null;
+                    $scope.email = null;
+                    $scope.street_address = null;
+                    $scope.city = null;
+                    $scope.state = null;
+                    $scope.zip_code = null;
+                    $scope.people_num = null;
+                    $scope.pet_num = null;
+                    $scope.rate = null;
+                    $scope.tax = null;
+                    $scope.hold = null;
+                    $scope.notes = null;
+
+                    getSite();
+                });
+            } else {
+                alert('Reservation overlaps an existing reservation!');
+            }
+
+
+
         } else if ($scope.customer_id > 0) {
             //if ($scope.exist[0]) {
                 console.log('existing customer');
 
+            $http.post('/get_new_conflicts', reservation).then(function(response) {
+                $scope.conflict = response.data;
+                console.log($scope.conflict);
+            });
+
+            if (!$scope.conflict) {
                 $http.post('/post_exist', reservation).then(function(response) {
                     $scope.post = response.data;
 
@@ -110,8 +128,19 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
                     getSite();
                 });
             } else {
-                console.log('new customer');
+                alert('Reservation overlaps an existing reservation!');
+            }
 
+
+        } else {
+            console.log('new customer');
+
+            $http.post('/get_new_conflicts', reservation).then(function(response) {
+                $scope.conflict = response.data;
+                console.log($scope.conflict);
+            });
+
+            if (!$scope.conflict) {
                 $http.post('/post_res', reservation).then(function(response) {
                     $scope.post = response.data;
 
@@ -135,6 +164,11 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
 
                     getSite();
                 });
+            } else {
+                alert('Reservation overlaps an existing reservation!');
+            }
+
+
             }
         }
 
