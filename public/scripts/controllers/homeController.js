@@ -21,23 +21,41 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function($sc
     function getMap() {
         $http.get('/get_map/'+ $scope.date).then(function(response) {
             $scope.mapData = response.data;
-            //console.log($scope.mapData);
+            console.log($scope.mapData);
             for(var i = 1; i < 100; i++) {
                 var thing = '#site' + i;
                 var site = document.querySelector(thing);
                 if(site) {
                     // site is NOT null
                     var $site = angular.element(site);
-                    $site.removeClass('booked');
+                    $site.removeClass('seasonal monthly weekly holiday nightly');
                 }
             }
             for(var j = 0; j < $scope.mapData.length; j++) {
                 //console.log($scope.mapData[j]);
                 var csite = document.querySelector('#site' + $scope.mapData[j].site_number);
                 if(csite) {
-                    // site is NOT null
                     var $csite = angular.element(csite);
-                    $csite.addClass('booked');
+                    switch ($scope.mapData[j].site_class) {
+                        case 'seasonal':
+                            $csite.addClass('seasonal');
+                            break;
+                        case 'monthly':
+                            $csite.addClass('monthly');
+                            break;
+                        case 'weekly':
+                            $csite.addClass('weekly');
+                            break;
+                        case 'holiday':
+                            $csite.addClass('holiday');
+                            break;
+                        case 'nightly':
+                            $csite.addClass('nightly');
+                            break;
+                    };
+                    // site is NOT null
+
+
                 }
             }
 

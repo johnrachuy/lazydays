@@ -12,7 +12,7 @@ app.get('/get_map/:date', function(req, res) {
     var date = new Date(req.params.date).toISOString();
 
     pg.connect(connectionString, function(err, client, done) {
-        var query = client.query('SELECT site_number FROM reservation WHERE check_in <= ($1) AND check_out > ($1)',
+        var query = client.query('SELECT site_number, site_class FROM reservation WHERE check_in <= ($1) AND check_out > ($1)',
             [date]);
 
         // Stream results back one row at a time

@@ -28,8 +28,24 @@ nav li a:hover {
     border: 1px solid black;
 }
 
-.booked {
+.seasonal {
     background-color: red;
+}
+
+.monthly {
+    background-color: yellow;
+}
+
+.weekly {
+    background-color: blue;
+}
+
+.holiday {
+    background-color: pink;
+}
+
+.nightly {
+    background-color: orange;
 }
 
 .full button span {
