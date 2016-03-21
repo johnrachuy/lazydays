@@ -12,22 +12,27 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
 
     $scope.setSeasonal = function() {
         $scope.rate = '1600.00';
+        $scope.tax = '0.00';
     };
 
     $scope.setMonthly = function() {
         $scope.rate = '500.00';
+        $scope.tax = '0.00';
     };
 
     $scope.setWeekly = function() {
         $scope.rate = '200.00';
+        $scope.tax = '14.75';
     };
 
     $scope.setHoliday = function() {
         $scope.rate = '45.00';
+        $scope.tax = '3.32';
     };
 
     $scope.setNightly = function() {
         $scope.rate = '40.00';
+        $scope.tax = '2.95';
     };
 
     $scope.postForm = function() {
@@ -58,12 +63,12 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
         if ($scope.reservation_id > 0) {
             console.log('existing reservation');
 
-            $http.post('/get_exist_conflicts', reservation).then(function(response) {
-                $scope.conflict = response.data;
-                console.log(response.data);
-            });
+            //$http.post('/get_exist_conflicts', reservation).then(function(response) {
+            //    $scope.conflict = response.data;
+            //    console.log(response.data);
+            //});
 
-            if (!$scope.conflict) {
+            //if (!$scope.conflict) {
                 $http.post('/update_res', reservation).then(function(response) {
                     $scope.post = response.data;
 
@@ -87,9 +92,9 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
 
                     getSite();
                 });
-            } else {
-                alert('Reservation overlaps an existing reservation!');
-            }
+            //} else {
+            //    alert('Reservation overlaps an existing reservation!');
+            //}
 
 
 
@@ -97,12 +102,12 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
             //if ($scope.exist[0]) {
                 console.log('existing customer');
 
-            $http.post('/get_new_conflicts', reservation).then(function(response) {
-                $scope.conflict = response.data;
-                console.log($scope.conflict);
-            });
-
-            if (!$scope.conflict) {
+            //$http.post('/get_new_conflicts', reservation).then(function(response) {
+            //    $scope.conflict = response.data;
+            //    console.log($scope.conflict);
+            //});
+            //
+            //if (!$scope.conflict) {
                 $http.post('/post_exist', reservation).then(function(response) {
                     $scope.post = response.data;
 
@@ -127,20 +132,20 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
 
                     getSite();
                 });
-            } else {
-                alert('Reservation overlaps an existing reservation!');
-            }
+            //} else {
+            //    alert('Reservation overlaps an existing reservation!');
+            //}
 
 
         } else {
             console.log('new customer');
 
-            $http.post('/get_new_conflicts', reservation).then(function(response) {
-                $scope.conflict = response.data;
-                console.log($scope.conflict);
-            });
+            //$http.post('/get_new_conflicts', reservation).then(function(response) {
+            //    $scope.conflict = response.data;
+            //    console.log($scope.conflict);
+            //});
 
-            if (!$scope.conflict) {
+            //if (!$scope.conflict) {
                 $http.post('/post_res', reservation).then(function(response) {
                     $scope.post = response.data;
 
@@ -164,9 +169,9 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
 
                     getSite();
                 });
-            } else {
-                alert('Reservation overlaps an existing reservation!');
-            }
+            //} else {
+            //    alert('Reservation overlaps an existing reservation!');
+            //}
 
 
             }

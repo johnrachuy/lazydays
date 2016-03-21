@@ -1,29 +1,29 @@
 CREATE TABLE customer
     (
         customer_id SERIAL NOT NULL PRIMARY KEY,
-        first_name varchar(255) NOT NULL,
-        last_name varchar(255) NOT NULL,
-        phone varchar(30),
-        email varchar(255),
-        street_address varchar(255),
-        city varchar(100),
-        state varchar(3),
-        zip_code varchar(5)
+        first_name VARCHAR(255) NOT NULL,
+        last_name VARCHAR(255) NOT NULL,
+        phone VARCHAR(30),
+        email VARCHAR(255),
+        street_address VARCHAR(255),
+        city VARCHAR(100),
+        state VARCHAR(3),
+        zip_code VARCHAR(5)
     );
 
 CREATE TABLE reservation
     (
         reservation_id SERIAL NOT NULL PRIMARY KEY,
         site_number INTEGER NOT NULL,
-        check_in varchar(255) NOT NULL,
-        check_out varchar(255) NOT NULL,
-        site_class varchar(30) NOT NULL,
+        check_in VARCHAR(255) NOT NULL,
+        check_out VARCHAR(255) NOT NULL,
+        site_class VARCHAR(30) NOT NULL,
         people_num INTEGER,
         pet_num INTEGER,
         rate DECIMAL,
         tax DECIMAL,
-        hold varchar(20),
-        notes text,
+        hold VARCHAR(20),
+        notes TEXT,
         canceled BOOLEAN NOT NULL,
         fk_customer_id INTEGER NOT NULL REFERENCES customer (customer_id)
     );
