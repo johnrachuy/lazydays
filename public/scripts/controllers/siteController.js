@@ -190,6 +190,8 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
             $scope.state = $scope.exist[0].state;
             $scope.zip_code = $scope.exist[0].zip_code;
             $scope.customer_id = $scope.exist[0].customer_id;
+
+            $scope.selectedName = null;
             //console.log($scope.exist);
         });
     };

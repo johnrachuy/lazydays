@@ -22,7 +22,9 @@
     /*background-color: #111;*/
 /*}*/
 body {
-    background: lightgray;
+    /*background: lightgray;*/
+    /*background: #e6faff*/
+;
 }
 
 .row1 {
@@ -91,6 +93,7 @@ body {
 }
 
 .brown {
+    color: tan;
     background-color: tan;
 }
 
@@ -104,6 +107,8 @@ body {
 
 .jumbotron {
     background-color: #0FA0CE;
+    /*background-color: #ffc266;*/
+    padding: 10px;
 }
 
 .jumbotron th {
@@ -111,10 +116,32 @@ body {
 }
 
 .space {
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 16px;
+    padding-right: 16px;
 }
 
 h3 {
     color: white;
+}
+
+#site-view {
+    background-color: #d9d9d9;
+    padding-top: 20px;
+}
+
+.image {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.login {
+    text-align: center;
+}
+
+#login-box {
+    color: white;
+    background-color: #0FA0CE;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border: solid 3px black;
 }

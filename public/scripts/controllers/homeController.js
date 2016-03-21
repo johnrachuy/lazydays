@@ -58,6 +58,7 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function($sc
     $scope.getInfo = function() {
         $http.get('/get_info/'+ $scope.selectedName).then(function(response) {
             $scope.viewData = response.data;
+            $scope.selectedName = null;
         });
     };
 
@@ -160,9 +161,7 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function($sc
 
         return '';
     }
-    //$(function () {
-    //    $('#datetimepicker1').datetimepicker();
-    //});
+
 
         console.log('Home Controller');
 }]);

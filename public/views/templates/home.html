@@ -2,14 +2,14 @@
 
     <div class="row">
         <div class="col-md-6">
-            <span class="map-date"><h4>{{date | date}}</h4></span><br>
+            <h3><span class="seasonal">Seasonal</span><span class="space"></span><span class="monthly">Monthly</span><span class="space"></span><span class="weekly">Weekly</span><span class="space"></span><span class="holiday">Holiday</span><span class="space"></span><span class="nightly">Nightly</span></h3>
             <table class="table-map">
                 <tbody>
                 <tr class="top-row">
-                    <td></td><td id="site20" ng-click="go('/site/20')">20</td><td id="site19" ng-click="go('/site/19')">19</td><td id="site18" ng-click="go('/site/18')">8</td><td id="site17" ng-click="go('/site/17')">17</td><td id="site16" ng-click="go('/site/16')">16</td><td id="site15" ng-click="go('/site/15')">5</td><td id="site14" ng-click="go('/site/14')">14</td><td id="site13" ng-click="go('/site/13')">13</td><td id="site12" ng-click="go('/site/12')">2</td><td id="site11" ng-click="go('/site/11')">11</td><td></td>
+                    <td></td><td id="site20" ng-click="go('/site/20')">20</td><td id="site19" ng-click="go('/site/19')">19</td><td id="site18" ng-click="go('/site/18')">18</td><td id="site17" ng-click="go('/site/17')">17</td><td id="site16" ng-click="go('/site/16')">16</td><td id="site15" ng-click="go('/site/15')">15</td><td id="site14" ng-click="go('/site/14')">14</td><td id="site13" ng-click="go('/site/13')">13</td><td id="site12" ng-click="go('/site/12')">12</td><td id="site11" ng-click="go('/site/11')">11</td><td></td>
                 </tr>
                 <tr class="brown">
-                    <td>x</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                    <td>0</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                 </tr>
                 <tr>
                     <td class="brown"></td><td></td><td id="site86" ng-click="go('/site/86')">86</td><td class="brown"></td><td></td><td id="site60" ng-click="go('/site/60')">60</td><td class="brown"></td><td id="site47" ng-click="go('/site/47')">47</td><td id="site32" ng-click="go('/site/32')">32</td><td></td><td></td><td class="brown"></td>
@@ -90,7 +90,7 @@
                     <td class="brown"></td><td id="site87" ng-click="go('/site/87')">87</td><td></td><td class="brown"></td><td id="site61" ng-click="go('/site/61')">61</td><td></td><td class="brown"></td><td id="site33" ng-click="go('/site/33')">33</td><td></td><td class="brown"></td><td></td><td class="brown"></td>
                 </tr>
                 <tr class="brown">
-                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>x</td>
+                    <td ng-click="open('lg')"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>0</td>
                 </tr>
                 </tbody>
             </table>
@@ -98,7 +98,7 @@
 
 
         <div class="col-md-6">
-            <h3><span class="seasonal">-Seasonal-</span><span class="space"></span><span class="monthly">-Monthly-</span><span class="space"></span><span class="weekly">-Weekly-</span><span class="space"></span><span class="holiday">-Holiday-</span><span class="space"></span><span class="nightly">Nightly</span></h3>
+            <span class="map-date"><h4>{{date | date:'fullDate'}}</h4></span><br>
         </div>
 
 
@@ -107,18 +107,10 @@
             <!--<input type="date" ng-model="date" ng-change="getMap()">-->
         </div>
         <div class="col-md-6" class="container-fluid typeahead-demo">
-            <input type="text" ng-model="selectedName" typeahead-on-select="getInfo()" uib-typeahead="person.customer_id as person.last_name + ', ' + person.first_name for person in getNames | filter:$viewValue | limitTo:8" class="form-control" placeholder="Existing Customers">
+            <input type="text" ng-model="selectedName" typeahead-on-select="getInfo()" uib-typeahead="person.customer_id as person.last_name + ', ' + person.first_name for person in getNames | filter:$viewValue | limitTo:8" class="form-control" placeholder="type first or last name for customer info...">
         </div>
         <div class="col-md-6">
             <table class="table"><thead><tr><th>Last</th><th>First</th><th>Site</th><th>Check IN</th><th>Check OUT</th><th>Notes</th></tr></thead><tbody ng-repeat="data in viewData"><tr><td>{{data.last_name}}</td><td>{{data.first_name}}</td><td>{{data.site_number}}</td><td>{{data.check_in | date}}</td><td>{{data.check_out | date}}</td><td>{{data.notes}}</td></tr></tbody></table>
-            <div class="form-group">
-                <div class='input-group date' id='datetimepicker1'>
-                    <input type='text' class="form-control" />
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-            </div>
         </div>
     </div>
 
