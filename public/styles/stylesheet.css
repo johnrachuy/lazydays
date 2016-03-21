@@ -51,16 +51,16 @@ body {
     background-color: orange;
 }
 
-.full button span {
-    background-color: limegreen;
-    border-radius: 12px;
-    color: black;
-}
-.partially button span {
-    background-color: orange;
-    border-radius: 12px;
-    color: black;
-}
+/*.full button span {*/
+    /*background-color: limegreen;*/
+    /*border-radius: 12px;*/
+    /*color: black;*/
+/*}*/
+/*.partially button span {*/
+    /*background-color: orange;*/
+    /*border-radius: 12px;*/
+    /*color: black;*/
+/*}*/
 
 .form-label-left {
     margin-left: 100px;
@@ -107,5 +107,14 @@ body {
 }
 
 .jumbotron th {
+    color: white;
+}
+
+.space {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+h3 {
     color: white;
 }
