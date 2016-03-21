@@ -12,7 +12,7 @@ app.get('/get_map/:date', function(req, res) {
     var date = new Date(req.params.date).toISOString();
 
     pg.connect(connectionString, function(err, client, done) {
-        var query = client.query('SELECT site_number, site_class FROM reservation WHERE check_in <= ($1) AND check_out > ($1)',
+        var query = client.query('SELECT site_number, site_class FROM reservation WHERE check_in <= ($1) AND check_out > ($1) AND canceled = false',
             [date]);
 
         // Stream results back one row at a time
@@ -246,7 +246,7 @@ app.get('/get_site/:site_number', function(req, res) {
     //console.log(req.params);
 
     pg.connect(connectionString, function(err, client, done) {
-        var query = client.query('SELECT * FROM customer JOIN reservation ON fk_customer_id=customer.customer_id WHERE site_number = ($1) ORDER BY reservation.check_in DESC',
+        var query = client.query('SELECT * FROM customer JOIN reservation ON fk_customer_id=customer.customer_id WHERE site_number = ($1) AND canceled = false ORDER BY reservation.check_in DESC',
             [req.params.site_number]);
 
         // Stream results back one row at a time
@@ -273,7 +273,7 @@ app.get('/get_info/:selectedName', function(req, res) {
     //console.log(req.params);
 
     pg.connect(connectionString, function(err, client, done) {
-        var query = client.query('SELECT * FROM customer JOIN reservation ON fk_customer_id=customer.customer_id WHERE fk_customer_id = ($1) ORDER BY reservation.check_in DESC',
+        var query = client.query('SELECT * FROM customer JOIN reservation ON fk_customer_id=customer.customer_id WHERE fk_customer_id = ($1) AND canceled = false ORDER BY reservation.check_in DESC',
             [req.params.selectedName]);
 
         // Stream results back one row at a time

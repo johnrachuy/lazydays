@@ -109,6 +109,14 @@
         </div>
         <div class="col-md-6">
             <table class="table"><thead><tr><th>Last</th><th>First</th><th>Site</th><th>Check IN</th><th>Check OUT</th><th>Notes</th></tr></thead><tbody ng-repeat="data in viewData"><tr><td>{{data.last_name}}</td><td>{{data.first_name}}</td><td>{{data.site_number}}</td><td>{{data.check_in | date}}</td><td>{{data.check_out | date}}</td><td>{{data.notes}}</td></tr></tbody></table>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
         </div>
     </div>
 

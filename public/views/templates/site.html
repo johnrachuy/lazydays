@@ -3,11 +3,11 @@
     <div class="row">
         <div class="col-md-2" ng-model="site_number">
             <h2>Site # {{site_number}}</h2>
-            <div class="radio"><label><input type="radio" ng-model="site_class" value="seasonal" ng-change="setSeasonal()"><span class="label-body">Seasonal</span></label></div>
-            <div class="radio"><label><input type="radio" ng-model="site_class" value="monthly" ng-change="setMonthly()"><span class="label-body">Monthly</span></label></div>
-            <div class="radio"><label><input type="radio" ng-model="site_class" value="weekly" ng-change="setWeekly()"><span class="label-body">Weekly</span></label></div>
-            <div class="radio"><label><input type="radio" ng-model="site_class" value="holiday" ng-change="setHoliday()"><span class="label-body">Holiday</span></label></div>
-            <div class="radio"><label><input type="radio" ng-model="site_class" value="nightly" ng-change="setNightly()"><span class="label-body">Nightly</span></label></div>
+            <div class="radio"><label><input type="radio" ng-model="site_class" value="seasonal" ng-change="setSeasonal()">Seasonal</label></div>
+            <div class="radio"><label><input type="radio" ng-model="site_class" value="monthly" ng-change="setMonthly()">Monthly</label></div>
+            <div class="radio"><label><input type="radio" ng-model="site_class" value="weekly" ng-change="setWeekly()">Weekly</label></div>
+            <div class="radio"><label><input type="radio" ng-model="site_class" value="holiday" ng-change="setHoliday()">Holiday</label></div>
+            <div class="radio"><label><input type="radio" ng-model="site_class" value="nightly" ng-change="setNightly()">Nightly</label></div>
         </div>
 
         <div class="col-md-6">
@@ -19,7 +19,7 @@
                     <div class="form-group"><label for="check_out">Check OUT:</label><input type="date" ng-model="check_out" class="form-control"></div>
                 </div>
             </div>
-            <div class="form-group"><label for="selectedName">Select Existing Camper</label><input type="text" class="form-control" ng-model="selectedName" typeahead-on-select="existingCust()" uib-typeahead="person.customer_id as person.last_name + ', ' + person.first_name for person in getNames | filter:$viewValue | limitTo:8" class="form-control" placeholder="Existing Customers"></div>
+            <div class="form-group"><label for="selectedName">Select Existing Camper</label><input type="text" class="form-control" ng-model="selectedName" typeahead-on-select="existingCust()" uib-typeahead="person.customer_id as person.last_name + ', ' + person.first_name for person in getNames | filter:$viewValue | limitTo:8" class="form-control" placeholder="start typing here..."></div>
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group"><label for="first_name">First Name</label><input type="text" ng-model="first_name" placeholder="first name" class="form-control"></div>

@@ -160,7 +160,9 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function($sc
 
         return '';
     }
-
+    //$(function () {
+    //    $('#datetimepicker1').datetimepicker();
+    //});
 
         console.log('Home Controller');
 }]);
