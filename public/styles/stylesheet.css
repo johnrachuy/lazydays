@@ -42,11 +42,11 @@ body {
 }
 
 .weekly {
-    background-color: blue;
+    background-color: #0FA0CE;
 }
 
 .holiday {
-    background-color: pink;
+    background-color: darkgray;
 }
 
 .nightly {
@@ -144,4 +144,8 @@ h3 {
     padding-top: 20px;
     padding-bottom: 20px;
     border: solid 3px black;
+}
+
+.table-map td:hover {
+    font-weight: bold;
 }
