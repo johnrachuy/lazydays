@@ -7,6 +7,7 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
     $scope.fk_customer_id = null;
     $scope.getNames = [];
     $scope.editForm = {};
+    $scope.conflict = [];
 
     getSite();
 
@@ -41,7 +42,7 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
             site_class: $scope.site_class,
             check_in: $scope.check_in,
             check_out: $scope.check_out,
-            first_name : $scope.first_name,
+            first_name: $scope.first_name,
             last_name: $scope.last_name,
             phone: $scope.phone,
             email: $scope.email,
@@ -63,13 +64,13 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
         if ($scope.reservation_id > 0) {
             console.log('existing reservation');
 
-            //$http.post('/get_exist_conflicts', reservation).then(function(response) {
-            //    $scope.conflict = response.data;
-            //    console.log(response.data);
-            //});
+            $http.get('/get_exist_conflicts?check_out=' + $scope.check_out + '&check_in=' + $scope.check_in + '&site_number=' + $scope.site_number + '&reservation_id=' + $scope.reservation_id).then(function (response) {
+                $scope.conflict = response.data;
+            });
+            console.log($scope.conflict);
 
-            //if (!$scope.conflict) {
-                $http.post('/update_res', reservation).then(function(response) {
+            if (Object.keys($scope.conflict).length == 0) {
+                $http.post('/update_res', reservation).then(function (response) {
                     $scope.post = response.data;
 
                     $scope.site_class = null;
@@ -92,90 +93,90 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
 
                     getSite();
                 });
-            //} else {
-            //    alert('Reservation overlaps an existing reservation!');
-            //}
-
+            } else {
+                alert('Reservation overlaps an existing reservation!');
+            }
 
 
         } else if ($scope.customer_id > 0) {
-            //if ($scope.exist[0]) {
+            if ($scope.exist[0]) {
                 console.log('existing customer');
 
-            //$http.post('/get_new_conflicts', reservation).then(function(response) {
-            //    $scope.conflict = response.data;
-            //    console.log($scope.conflict);
-            //});
-            //
-            //if (!$scope.conflict) {
-                $http.post('/post_exist', reservation).then(function(response) {
-                    $scope.post = response.data;
-
-                    $scope.site_class = null;
-                    $scope.check_in = null;
-                    $scope.check_out = null;
-                    $scope.first_name = null;
-                    $scope.last_name = null;
-                    $scope.phone = null;
-                    $scope.email = null;
-                    $scope.street_address = null;
-                    $scope.city = null;
-                    $scope.state = null;
-                    $scope.zip_code = null;
-                    $scope.people_num = null;
-                    $scope.pet_num = null;
-                    $scope.rate = null;
-                    $scope.tax = null;
-                    $scope.hold = null;
-                    $scope.notes = null;
-                    $scope.selectedName = null;
-
-                    getSite();
+                $http.get('/get_new_conflicts?check_out=' + $scope.check_out + '&check_in=' + $scope.check_in + '&site_number=' + $scope.site_number).then(function (response) {
+                    $scope.conflict = response.data;
+                    console.log($scope.conflict);
                 });
-            //} else {
-            //    alert('Reservation overlaps an existing reservation!');
-            //}
+
+                if (!$scope.conflict) {
+                    $http.post('/post_exist', reservation).then(function (response) {
+                        $scope.post = response.data;
+
+                        $scope.site_class = null;
+                        $scope.check_in = null;
+                        $scope.check_out = null;
+                        $scope.first_name = null;
+                        $scope.last_name = null;
+                        $scope.phone = null;
+                        $scope.email = null;
+                        $scope.street_address = null;
+                        $scope.city = null;
+                        $scope.state = null;
+                        $scope.zip_code = null;
+                        $scope.people_num = null;
+                        $scope.pet_num = null;
+                        $scope.rate = null;
+                        $scope.tax = null;
+                        $scope.hold = null;
+                        $scope.notes = null;
+                        $scope.selectedName = null;
+
+                        getSite();
+                    });
+                } else {
+                    alert('Reservation overlaps an existing reservation!');
+                }
 
 
-        } else {
-            console.log('new customer');
+            } else {
+                console.log('new customer');
 
-            //$http.post('/get_new_conflicts', reservation).then(function(response) {
-            //    $scope.conflict = response.data;
-            //    console.log($scope.conflict);
-            //});
-
-            //if (!$scope.conflict) {
-                $http.post('/post_res', reservation).then(function(response) {
-                    $scope.post = response.data;
-
-                    $scope.site_class = null;
-                    $scope.check_in = null;
-                    $scope.check_out = null;
-                    $scope.first_name = null;
-                    $scope.last_name = null;
-                    $scope.phone = null;
-                    $scope.email = null;
-                    $scope.street_address = null;
-                    $scope.city = null;
-                    $scope.state = null;
-                    $scope.zip_code = null;
-                    $scope.people_num = null;
-                    $scope.pet_num = null;
-                    $scope.rate = null;
-                    $scope.tax = null;
-                    $scope.hold = null;
-                    $scope.notes = null;
-
-                    getSite();
+                $http.get('/get_new_conflicts?check_out=' + $scope.check_out + '&check_in=' + $scope.check_in + '&site_number=' + $scope.site_number).then(function (response) {
+                    $scope.conflict = response.data;
+                    console.log($scope.conflict);
                 });
-            //} else {
-            //    alert('Reservation overlaps an existing reservation!');
-            //}
+
+                if (Object.keys($scope.conflict).length > 0) {
+                    $http.post('/post_res', reservation).then(function (response) {
+                        $scope.post = response.data;
+
+                        $scope.site_class = null;
+                        $scope.check_in = null;
+                        $scope.check_out = null;
+                        $scope.first_name = null;
+                        $scope.last_name = null;
+                        $scope.phone = null;
+                        $scope.email = null;
+                        $scope.street_address = null;
+                        $scope.city = null;
+                        $scope.state = null;
+                        $scope.zip_code = null;
+                        $scope.people_num = null;
+                        $scope.pet_num = null;
+                        $scope.rate = null;
+                        $scope.tax = null;
+                        $scope.hold = null;
+                        $scope.notes = null;
+
+                        getSite();
+                    });
+                } else {
+                    alert('Reservation overlaps an existing reservation!');
+                }
 
 
             }
         }
+    }
 
     $http.get('/get_names').then(function(response) {
         $scope.getNames = response.data;

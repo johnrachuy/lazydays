@@ -322,23 +322,26 @@ app.get('/get_exist/:customer_id', function(req, res) {
     });
 });
 
-app.post('/get_exist_conflicts', function(req, res) {
+app.get('/get_exist_conflicts', function(req, res) {
     var results = [];
-    console.log(req.body);
+    //console.log(req.query);
+    var check_out = new Date(req.query.check_out).toISOString();
+    var check_in = new Date(req.query.check_in).toISOString();
 
     pg.connect(connectionString, function(err, client, done) {
-        var query = client.query('SELECT * FROM reservation WHERE (check_in < ($1) AND ($2) < check_out) AND site_number = ($3) AND reservation_id = ($4)',
-            [req.body.check_in, req.body.check_out, req.body.site_number, req.body.reservation_id]);
+        var query = client.query('SELECT * FROM reservation WHERE (check_in < ($1) AND ($2) < check_out) AND site_number = ($3) AND reservation_id != ($4)',
+            [check_out, check_in, req.query.site_number, req.query.reservation_id]);
 
         // Stream results back one row at a time
         query.on('row', function(row) {
             results.push(row);
+
         });
 
         // close connection
         query.on('end', function() {
             done();
-            //console.log(results);
+            console.log(results);
             return res.json(results);
 
         });
@@ -349,13 +352,15 @@ app.post('/get_exist_conflicts', function(req, res) {
     });
 });
 
-app.post('/get_new_conflicts', function(req, res) {
+app.get('/get_new_conflicts', function(req, res) {
     var results = [];
-    //console.log(req.body);
+    //console.log(req.query);
+    var check_out = new Date(req.query.check_out).toISOString();
+    var check_in = new Date(req.query.check_in).toISOString();
 
     pg.connect(connectionString, function(err, client, done) {
         var query = client.query('SELECT * FROM reservation WHERE (check_in < ($1) AND ($2) < check_out) AND site_number = ($3)',
-            [req.body.check_in, req.body.check_out, req.body.site_number]);
+            [check_out, check_in, req.query.site_number]);
 
         // Stream results back one row at a time
         query.on('row', function(row) {
