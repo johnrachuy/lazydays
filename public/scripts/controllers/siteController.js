@@ -36,6 +36,20 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
         $scope.tax = '2.95';
     };
 
+    function getExistingConflict() {
+        var promise = $http.get('/get_exist_conflicts?check_out=' + $scope.check_out + '&check_in=' + $scope.check_in + '&site_number=' + $scope.site_number + '&reservation_id=' + $scope.reservation_id).then(function (response) {
+            $scope.conflict = response.data;
+        });
+        return promise;
+    }
+
+    function getNewConflict() {
+        var promise = $http.get('/get_new_conflicts?check_out=' + $scope.check_out + '&check_in=' + $scope.check_in + '&site_number=' + $scope.site_number).then(function (response) {
+            $scope.conflict = response.data;
+        });
+        return promise;
+    }
+
     $scope.postForm = function() {
         var reservation = {
             site_number: $scope.site_number,
@@ -64,51 +78,11 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
         if ($scope.reservation_id > 0) {
             console.log('existing reservation');
 
-            $http.get('/get_exist_conflicts?check_out=' + $scope.check_out + '&check_in=' + $scope.check_in + '&site_number=' + $scope.site_number + '&reservation_id=' + $scope.reservation_id).then(function (response) {
-                $scope.conflict = response.data;
-            });
-            console.log($scope.conflict);
+            getExistingConflict().then(function (response) {
+                console.log($scope.conflict);
 
-            if (Object.keys($scope.conflict).length == 0) {
-                $http.post('/update_res', reservation).then(function (response) {
-                    $scope.post = response.data;
-
-                    $scope.site_class = null;
-                    $scope.check_in = null;
-                    $scope.check_out = null;
-                    $scope.first_name = null;
-                    $scope.last_name = null;
-                    $scope.phone = null;
-                    $scope.email = null;
-                    $scope.street_address = null;
-                    $scope.city = null;
-                    $scope.state = null;
-                    $scope.zip_code = null;
-                    $scope.people_num = null;
-                    $scope.pet_num = null;
-                    $scope.rate = null;
-                    $scope.tax = null;
-                    $scope.hold = null;
-                    $scope.notes = null;
-
-                    getSite();
-                });
-            } else {
-                alert('Reservation overlaps an existing reservation!');
-            }
-
-
-        } else if ($scope.customer_id > 0) {
-            if ($scope.exist[0]) {
-                console.log('existing customer');
-
-                $http.get('/get_new_conflicts?check_out=' + $scope.check_out + '&check_in=' + $scope.check_in + '&site_number=' + $scope.site_number).then(function (response) {
-                    $scope.conflict = response.data;
-                    console.log($scope.conflict);
-                });
-
-                if (!$scope.conflict) {
-                    $http.post('/post_exist', reservation).then(function (response) {
+                if (Object.keys($scope.conflict).length == 0) {
+                    $http.post('/update_res', reservation).then(function (response) {
                         $scope.post = response.data;
 
                         $scope.site_class = null;
@@ -128,55 +102,86 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
                         $scope.tax = null;
                         $scope.hold = null;
                         $scope.notes = null;
-                        $scope.selectedName = null;
 
                         getSite();
                     });
                 } else {
                     alert('Reservation overlaps an existing reservation!');
                 }
+            });
 
+        } else if ($scope.customer_id > 0) {
+                console.log('existing customer');
+
+                getNewConflict().then(function (response) {
+                    console.log($scope.conflict);
+
+                    if (Object.keys($scope.conflict).length == 0) {
+                        $http.post('/post_exist', reservation).then(function (response) {
+                            $scope.post = response.data;
+
+                            $scope.site_class = null;
+                            $scope.check_in = null;
+                            $scope.check_out = null;
+                            $scope.first_name = null;
+                            $scope.last_name = null;
+                            $scope.phone = null;
+                            $scope.email = null;
+                            $scope.street_address = null;
+                            $scope.city = null;
+                            $scope.state = null;
+                            $scope.zip_code = null;
+                            $scope.people_num = null;
+                            $scope.pet_num = null;
+                            $scope.rate = null;
+                            $scope.tax = null;
+                            $scope.hold = null;
+                            $scope.notes = null;
+                            $scope.selectedName = null;
+
+                            getSite();
+                        });
+                    } else {
+                        alert('Reservation overlaps an existing reservation!');
+                    }
+                });
 
             } else {
                 console.log('new customer');
 
-                $http.get('/get_new_conflicts?check_out=' + $scope.check_out + '&check_in=' + $scope.check_in + '&site_number=' + $scope.site_number).then(function (response) {
-                    $scope.conflict = response.data;
+                getNewConflict().then(function (response) {
                     console.log($scope.conflict);
+
+                    if (Object.keys($scope.conflict).length == 0) {
+                        $http.post('/post_res', reservation).then(function (response) {
+                            $scope.post = response.data;
+
+                            $scope.site_class = null;
+                            $scope.check_in = null;
+                            $scope.check_out = null;
+                            $scope.first_name = null;
+                            $scope.last_name = null;
+                            $scope.phone = null;
+                            $scope.email = null;
+                            $scope.street_address = null;
+                            $scope.city = null;
+                            $scope.state = null;
+                            $scope.zip_code = null;
+                            $scope.people_num = null;
+                            $scope.pet_num = null;
+                            $scope.rate = null;
+                            $scope.tax = null;
+                            $scope.hold = null;
+                            $scope.notes = null;
+
+                            getSite();
+                        });
+                    } else {
+                        alert('Reservation overlaps an existing reservation!');
+                    }
                 });
-
-                if (Object.keys($scope.conflict).length > 0) {
-                    $http.post('/post_res', reservation).then(function (response) {
-                        $scope.post = response.data;
-
-                        $scope.site_class = null;
-                        $scope.check_in = null;
-                        $scope.check_out = null;
-                        $scope.first_name = null;
-                        $scope.last_name = null;
-                        $scope.phone = null;
-                        $scope.email = null;
-                        $scope.street_address = null;
-                        $scope.city = null;
-                        $scope.state = null;
-                        $scope.zip_code = null;
-                        $scope.people_num = null;
-                        $scope.pet_num = null;
-                        $scope.rate = null;
-                        $scope.tax = null;
-                        $scope.hold = null;
-                        $scope.notes = null;
-
-                        getSite();
-                    });
-                } else {
-                    alert('Reservation overlaps an existing reservation!');
-                }
-
-
             }
-        }
-    }
+    };
 
     $http.get('/get_names').then(function(response) {
         $scope.getNames = response.data;

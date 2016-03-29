@@ -220,15 +220,10 @@ app.post('/update_res', function(req, res) {
 });
 
 app.put('/cancel_res', function(req, res) {
-    //console.log(req.body.id);
-
-    var cancelEntry = {
-        reservation_id: req.body.reservation_id
-    };
 
     pg.connect(connectionString, function(err, client, done) {
         client.query("UPDATE reservation SET canceled = NOT canceled WHERE reservation_id = ($1)",
-            [cancelEntry.reservation_id],
+            [req.body.reservation_id],
             function (err, result) {
                 done();
                 if(err) {
@@ -243,7 +238,6 @@ app.put('/cancel_res', function(req, res) {
 
 app.get('/get_site/:site_number', function(req, res) {
     var results = [];
-    //console.log(req.params);
 
     pg.connect(connectionString, function(err, client, done) {
         var query = client.query('SELECT * FROM customer JOIN reservation ON fk_customer_id=customer.customer_id WHERE site_number = ($1) AND canceled = false ORDER BY reservation.check_in DESC',
@@ -270,7 +264,6 @@ app.get('/get_site/:site_number', function(req, res) {
 
 app.get('/get_info/:selectedName', function(req, res) {
     var results = [];
-    //console.log(req.params);
 
     pg.connect(connectionString, function(err, client, done) {
         var query = client.query('SELECT * FROM customer JOIN reservation ON fk_customer_id=customer.customer_id WHERE fk_customer_id = ($1) AND canceled = false ORDER BY reservation.check_in DESC',
@@ -297,7 +290,6 @@ app.get('/get_info/:selectedName', function(req, res) {
 
 app.get('/get_exist/:customer_id', function(req, res) {
     var results = [];
-    //console.log(req.params);
 
     pg.connect(connectionString, function(err, client, done) {
         var query = client.query('SELECT * FROM customer WHERE customer_id = ($1)',
@@ -311,7 +303,6 @@ app.get('/get_exist/:customer_id', function(req, res) {
         // close connection
         query.on('end', function() {
             done();
-            //console.log(results);
             return res.json(results);
 
         });
@@ -324,7 +315,6 @@ app.get('/get_exist/:customer_id', function(req, res) {
 
 app.get('/get_exist_conflicts', function(req, res) {
     var results = [];
-    //console.log(req.query);
     var check_out = new Date(req.query.check_out).toISOString();
     var check_in = new Date(req.query.check_in).toISOString();
 
@@ -354,7 +344,6 @@ app.get('/get_exist_conflicts', function(req, res) {
 
 app.get('/get_new_conflicts', function(req, res) {
     var results = [];
-    //console.log(req.query);
     var check_out = new Date(req.query.check_out).toISOString();
     var check_in = new Date(req.query.check_in).toISOString();
 
