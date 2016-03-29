@@ -122,7 +122,8 @@
                         <button ng-click="postForm()" type="button" class="btn btn-success">Submit</button>
                     </div>
                     <div class="col-md-6">
-                        <button ng-click="cancelRes()" type="button" class="btn btn-danger">Cancel Reservation</button>
+                        <!--<button ng-click="cancelRes()" type="button" class="btn btn-danger">Cancel Reservation</button>-->
+                        <button type="button" ng-really-message="Are you sure?" ng-really-click="cancelRes()" class="btn btn-danger">Cancel Reservation</button>
                     </div>
                 </div>
         </div>
