@@ -36,6 +36,27 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
         $scope.tax = '2.95';
     };
 
+    function clearForm() {
+        $scope.site_class = null;
+        $scope.check_in = null;
+        $scope.check_out = null;
+        $scope.first_name = null;
+        $scope.last_name = null;
+        $scope.phone = null;
+        $scope.email = null;
+        $scope.street_address = null;
+        $scope.city = null;
+        $scope.state = null;
+        $scope.zip_code = null;
+        $scope.people_num = null;
+        $scope.pet_num = null;
+        $scope.rate = null;
+        $scope.tax = null;
+        $scope.hold = null;
+        $scope.notes = null;
+        getSite();
+    }
+
     function getExistingConflict() {
         var promise = $http.get('/get_exist_conflicts?check_out=' + $scope.check_out + '&check_in=' + $scope.check_in + '&site_number=' + $scope.site_number + '&reservation_id=' + $scope.reservation_id).then(function (response) {
             $scope.conflict = response.data;
@@ -84,26 +105,7 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
                 if (Object.keys($scope.conflict).length == 0) {
                     $http.post('/update_res', reservation).then(function (response) {
                         $scope.post = response.data;
-
-                        $scope.site_class = null;
-                        $scope.check_in = null;
-                        $scope.check_out = null;
-                        $scope.first_name = null;
-                        $scope.last_name = null;
-                        $scope.phone = null;
-                        $scope.email = null;
-                        $scope.street_address = null;
-                        $scope.city = null;
-                        $scope.state = null;
-                        $scope.zip_code = null;
-                        $scope.people_num = null;
-                        $scope.pet_num = null;
-                        $scope.rate = null;
-                        $scope.tax = null;
-                        $scope.hold = null;
-                        $scope.notes = null;
-
-                        getSite();
+                        clearForm();
                     });
                 } else {
                     alert('Reservation overlaps an existing reservation!');
@@ -119,27 +121,7 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
                     if (Object.keys($scope.conflict).length == 0) {
                         $http.post('/post_exist', reservation).then(function (response) {
                             $scope.post = response.data;
-
-                            $scope.site_class = null;
-                            $scope.check_in = null;
-                            $scope.check_out = null;
-                            $scope.first_name = null;
-                            $scope.last_name = null;
-                            $scope.phone = null;
-                            $scope.email = null;
-                            $scope.street_address = null;
-                            $scope.city = null;
-                            $scope.state = null;
-                            $scope.zip_code = null;
-                            $scope.people_num = null;
-                            $scope.pet_num = null;
-                            $scope.rate = null;
-                            $scope.tax = null;
-                            $scope.hold = null;
-                            $scope.notes = null;
-                            $scope.selectedName = null;
-
-                            getSite();
+                            clearForm();
                         });
                     } else {
                         alert('Reservation overlaps an existing reservation!');
@@ -155,26 +137,7 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
                     if (Object.keys($scope.conflict).length == 0) {
                         $http.post('/post_res', reservation).then(function (response) {
                             $scope.post = response.data;
-
-                            $scope.site_class = null;
-                            $scope.check_in = null;
-                            $scope.check_out = null;
-                            $scope.first_name = null;
-                            $scope.last_name = null;
-                            $scope.phone = null;
-                            $scope.email = null;
-                            $scope.street_address = null;
-                            $scope.city = null;
-                            $scope.state = null;
-                            $scope.zip_code = null;
-                            $scope.people_num = null;
-                            $scope.pet_num = null;
-                            $scope.rate = null;
-                            $scope.tax = null;
-                            $scope.hold = null;
-                            $scope.notes = null;
-
-                            getSite();
+                            clearForm();
                         });
                     } else {
                         alert('Reservation overlaps an existing reservation!');
@@ -238,25 +201,7 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
 
         $http.put('/cancel_res', cancel).then(function(response) {
             $scope.cancel = response.data;
-            $scope.site_class = null;
-            $scope.check_in = null;
-            $scope.check_out = null;
-            $scope.first_name = null;
-            $scope.last_name = null;
-            $scope.phone = null;
-            $scope.email = null;
-            $scope.street_address = null;
-            $scope.city = null;
-            $scope.state = null;
-            $scope.zip_code = null;
-            $scope.people_num = null;
-            $scope.pet_num = null;
-            $scope.rate = null;
-            $scope.tax =null;
-            $scope.hold = null;
-            $scope.notes = null;
-
-            getSite();
+            clearForm();
         });
     };
 
