@@ -58,14 +58,14 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
     }
 
     function getExistingConflict() {
-        var promise = $http.get('/get_exist_conflicts?check_out=' + $scope.check_out + '&check_in=' + $scope.check_in + '&site_number=' + $scope.site_number + '&reservation_id=' + $scope.reservation_id).then(function (response) {
+        var promise = $http.get('/date_conflicts_update?check_out=' + $scope.check_out + '&check_in=' + $scope.check_in + '&site_number=' + $scope.site_number + '&reservation_id=' + $scope.reservation_id).then(function (response) {
             $scope.conflict = response.data;
         });
         return promise;
     }
 
     function getNewConflict() {
-        var promise = $http.get('/get_new_conflicts?check_out=' + $scope.check_out + '&check_in=' + $scope.check_in + '&site_number=' + $scope.site_number).then(function (response) {
+        var promise = $http.get('/date_conflicts_new?check_out=' + $scope.check_out + '&check_in=' + $scope.check_in + '&site_number=' + $scope.site_number).then(function (response) {
             $scope.conflict = response.data;
         });
         return promise;
@@ -103,7 +103,7 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
                 console.log($scope.conflict);
 
                 if (Object.keys($scope.conflict).length == 0) {
-                    $http.post('/update_res', reservation).then(function (response) {
+                    $http.put('/update_reservation', reservation).then(function (response) {
                         $scope.post = response.data;
                         clearForm();
                     });
@@ -119,7 +119,7 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
                     console.log($scope.conflict);
 
                     if (Object.keys($scope.conflict).length == 0) {
-                        $http.post('/post_exist', reservation).then(function (response) {
+                        $http.post('/new_reservation_existing', reservation).then(function (response) {
                             $scope.post = response.data;
                             clearForm();
                         });
@@ -135,7 +135,7 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
                     console.log($scope.conflict);
 
                     if (Object.keys($scope.conflict).length == 0) {
-                        $http.post('/post_res', reservation).then(function (response) {
+                        $http.post('/new_reservation', reservation).then(function (response) {
                             $scope.post = response.data;
                             clearForm();
                         });
@@ -146,13 +146,13 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
             }
     };
 
-    $http.get('/get_names').then(function(response) {
+    $http.get('/customers').then(function(response) {
         $scope.getNames = response.data;
         //console.log($scope.getNames);
     });
 
     $scope.existingCust = function(){
-        $http.get('/get_exist/'+ $scope.selectedName).then(function(response) {
+        $http.get('/selected_name_site/'+ $scope.selectedName).then(function(response) {
             $scope.exist = response.data;
 
             $scope.first_name = $scope.exist[0].first_name;
@@ -199,14 +199,14 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
             reservation_id: $scope.editForm.reservation_id
         };
 
-        $http.put('/cancel_res', cancel).then(function(response) {
+        $http.put('/cancel_reservation', cancel).then(function(response) {
             $scope.cancel = response.data;
             clearForm();
         });
     };
 
     function getSite() {
-        $http.get('/get_site/'+ $scope.site_number).then(function(response) {
+        $http.get('/site_info/'+ $scope.site_number).then(function(response) {
             $scope.siteData = response.data;
             //console.log($scope.siteData);
         });

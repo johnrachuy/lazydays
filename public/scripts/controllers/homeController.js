@@ -9,7 +9,7 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function($sc
     getMap();
 
     function getMap() {
-        $http.get('/get_map/'+ $scope.date).then(function(response) {
+        $http.get('/map/'+ $scope.date).then(function(response) {
             $scope.mapData = response.data;
             console.log($scope.mapData);
             for(var i = 1; i < 100; i++) {
@@ -51,12 +51,12 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function($sc
     $scope.selectedName = null;
     $scope.getNames = [];
 
-    $http.get('/get_names').then(function(response) {
+    $http.get('/customers').then(function(response) {
         $scope.getNames = response.data;
     });
 
     $scope.getInfo = function() {
-        $http.get('/get_info/'+ $scope.selectedName).then(function(response) {
+        $http.get('/selected_name_home/'+ $scope.selectedName).then(function(response) {
             $scope.viewData = response.data;
             $scope.selectedName = null;
         });
