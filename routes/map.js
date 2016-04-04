@@ -8,6 +8,7 @@ router.get('/:date', function(req, res) {
     var date = new Date(req.params.date).toISOString();
 
     pg.connect(connectionString, function(err, client, done) {
+        console.log(client);
         var query = client.query('SELECT site_number, site_class FROM reservation WHERE check_in <= ($1) AND check_out > ($1) AND canceled = false',
             [date]);
 
