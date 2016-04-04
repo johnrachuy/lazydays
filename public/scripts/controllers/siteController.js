@@ -135,6 +135,7 @@ myApp.controller('SiteController', ['$scope', '$http', '$location', '$filter', '
                     console.log($scope.conflict);
 
                     if (Object.keys($scope.conflict).length == 0) {
+                        console.log('here');
                         $http.post('/new_reservation', reservation).then(function (response) {
                             $scope.post = response.data;
                             clearForm();
