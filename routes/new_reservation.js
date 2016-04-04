@@ -4,6 +4,7 @@ var connectionString = require('../modules/connection');
 var pg = require('pg');
 
 router.post('/', function(req, res) {
+    console.log(req.body);
     var addEntry = {
         first_name: req.body.first_name,
         last_name: req.body.last_name,
