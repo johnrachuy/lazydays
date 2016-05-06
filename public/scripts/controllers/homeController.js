@@ -66,8 +66,6 @@ myApp.controller('HomeController', ['$scope', '$http', '$location', function($sc
         $location.path(path);
     };
 
-
-
     $scope.today = function() {
         $scope.date = new Date();
     };
