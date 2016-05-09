@@ -5,7 +5,7 @@ var connectionString = '';
 //    connectionString = process.env.DATABASE_URL + 'ssl';
 //} else {
 //    connectionString = 'postgres://localhost:5432/lazy_days';
-}
+//}
 
 //Heroku connectionString
 if(process.env.DATABASE_URL != undefined) {
